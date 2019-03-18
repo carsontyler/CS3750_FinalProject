@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseProject
 {
-    class Salary
+    public class Salary
     {
         [Key]
         public int SalaryId { get; set; }
@@ -15,7 +15,5 @@ namespace DatabaseProject
         public int SalaryAmount { get; set; }
         [Required]
         public short Year { get; set; }
-        
-        public ICollection<Employee> Employee { get; set; }
     }
 }

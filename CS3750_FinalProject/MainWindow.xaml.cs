@@ -1,17 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms;
 
 namespace CS3750_FinalProject
@@ -21,29 +10,39 @@ namespace CS3750_FinalProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Employee> _employees = new List<Employee>();
+
         public MainWindow()
         {
             InitializeComponent();
-            var temp = new OpenFileDialog
-            {
-                Filter = "CSV Files (*.csv)|*.csv"
-            };
-            if (temp.ShowDialog() == System.Windows.Forms.DialogResult.OK) { }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var filedialog = new OpenFileDialog();
-            if(filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                try
-                {
-                    string file = filedialog.FileName;
+                string file = filedialog.FileName;
+                TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
+                parser.SetDelimiters(",");
 
-                }
-                catch (Exception Ex)
+                string[] fields;
+
+                while (!parser.EndOfData)
                 {
-                    Console.Write(Ex);
+                    fields = parser.ReadFields();
+                    if (fields[0] == "" || fields[0] == "ID")
+                        continue;
+
+                    _employees.Add(new Employee
+                    {
+                        Id = fields[0],
+                        College = fields[1],
+                        Department = fields[2],
+                        Name = fields[3],
+                        Rank = fields[9],
+                        SalaryAmount = int.Parse(fields[18].Replace(",", ""))
+                    });
                 }
             }
         }

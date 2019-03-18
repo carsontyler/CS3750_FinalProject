@@ -5,23 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatabaseProject
+namespace CS3750_FinalProject
 {
-    class Employee
+    public class Employee
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        [MaxLength(10)]
+        public string Id { get; set; }
         public string College { get; set; }
-        [Required]
-        [MaxLength(20)]
         public string Department { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string Rank { get; set; }
-
-        public Salary Salary { get; set; }
+        public int SalaryAmount { get; set; }
     }
 }
