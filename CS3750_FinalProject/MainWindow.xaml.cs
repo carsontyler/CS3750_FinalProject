@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace CS3750_FinalProject
 {
@@ -23,6 +24,11 @@ namespace CS3750_FinalProject
         public MainWindow()
         {
             InitializeComponent();
+            var temp = new OpenFileDialog
+            {
+                Filter = "CSV Files (*.csv)|*.csv"
+            };
+            if (temp.ShowDialog() == System.Windows.Forms.DialogResult.OK) { }
         }
     }
 }
