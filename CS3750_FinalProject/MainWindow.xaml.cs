@@ -30,5 +30,22 @@ namespace CS3750_FinalProject
             };
             if (temp.ShowDialog() == System.Windows.Forms.DialogResult.OK) { }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var filedialog = new OpenFileDialog();
+            if(filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    string file = filedialog.FileName;
+
+                }
+                catch (Exception Ex)
+                {
+                    Console.Write(Ex);
+                }
+            }
+        }
     }
 }
