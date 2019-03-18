@@ -17,9 +17,11 @@ namespace CS3750_FinalProject
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Open_File(object sender, RoutedEventArgs e)
         {
             var filedialog = new OpenFileDialog();
+            //only allows .csv files 
+            filedialog.Filter = "CSV (*.csv)|*.csv";
             if (filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string file = filedialog.FileName;

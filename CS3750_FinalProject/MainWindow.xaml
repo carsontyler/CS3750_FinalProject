@@ -5,9 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CS3750_FinalProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Inversion Tracker" Height="450" Width="800">
     <Grid>
-        <Button x:Name="button" Content="Open" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="558,312,0,0" Click="Button_Click"/>
+        <Menu Margin="0" Height="25" VerticalAlignment="top" IsMainMenu="True">
+            <MenuItem Header="File" FontSize="12" Margin="0" Width="40"  HorizontalAlignment="Center" Height="25">
+                <MenuItem Header="Open" Margin="0" FontSize="12" Click="Open_File">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Icons/Open.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save" Margin="0"  FontSize="12">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Icons/Save.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Export" Padding="0,3,0,5"  FontSize="12" BorderBrush="LightGray" BorderThickness="0,0,0,2">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Icons/Export.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Print" Margin="0"  FontSize="12" Padding="0,3,0,5" BorderBrush="LightGray" BorderThickness="0,0,0,2" >
+                </MenuItem>
+                <MenuItem Header="Quit"  FontSize="12" Margin="0" Padding="0,3,0,5">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Icons/Exit.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit" FontSize="12" Margin="0" Width="40" Height="25"/>
+            <MenuItem Header="Tools" FontSize="12" Margin="0" Width="40" Height="25"/>
+            <MenuItem Header="Help" FontSize="12" Margin="0" Width="40"  HorizontalAlignment="Left" Height="25"/>
+        </Menu>
 
     </Grid>
 </Window>
