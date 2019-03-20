@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:CS3750_FinalProject"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

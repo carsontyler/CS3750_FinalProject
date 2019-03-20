@@ -1,7 +1,5 @@
-﻿using Microsoft.VisualBasic.FileIO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Forms;
 
 namespace CS3750_FinalProject
 {
@@ -10,43 +8,22 @@ namespace CS3750_FinalProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Employee> _employees = new List<Employee>();
+        #region Fields
+
+        #endregion
+
+        #region Constructor
 
         public MainWindow()
         {
             InitializeComponent();
+            Employees.EmployeesList = new List<Employee>();
         }
 
-        private void Open_File(object sender, RoutedEventArgs e)
-        {
-            var filedialog = new OpenFileDialog();
-            //only allows .csv files 
-            filedialog.Filter = "CSV (*.csv)|*.csv";
-            if (filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string file = filedialog.FileName;
-                TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
-                parser.SetDelimiters(",");
+        #endregion
 
-                string[] fields;
+        #region Methods
 
-                while (!parser.EndOfData)
-                {
-                    fields = parser.ReadFields();
-                    if (fields[0] == "" || fields[0] == "ID")
-                        continue;
-
-                    _employees.Add(new Employee
-                    {
-                        Id = fields[0],
-                        College = fields[1],
-                        Department = fields[2],
-                        Name = fields[3],
-                        Rank = fields[9],
-                        SalaryAmount = int.Parse(fields[18].Replace(",", ""))
-                    });
-                }
-            }
-        }
+        #endregion
     }
 }

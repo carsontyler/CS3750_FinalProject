@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CS3750_FinalProject
 {
-    class InversionCalculator
+    static class Employees
     {
+        public static List<Employee> EmployeesList { get; set; }
     }
 }
