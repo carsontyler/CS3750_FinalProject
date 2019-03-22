@@ -60,12 +60,11 @@ namespace CS3750_FinalProject
                 TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
                 parser.SetDelimiters(",");
 
-                string[] fields;
                 List<string> headers = new List<string>();
 
                 while (!parser.EndOfData)
                 {
-                    fields = parser.ReadFields();
+                    var fields = parser.ReadFields();
                     if (fields[0] == "")
                         continue;
 
@@ -82,7 +81,7 @@ namespace CS3750_FinalProject
                         Department = fields[headers.IndexOf("DEPT.")],
                         Name = fields[headers.IndexOf("NAME")],
                         Rank = fields[headers.IndexOf("RNK")],
-                        SalaryAmount = int.Parse(fields[headers.IndexOf("9MSALARY")])
+                        SalaryAmount = int.Parse(fields[headers.IndexOf("9M FTE SALARY")])
                     });
                 }
             }

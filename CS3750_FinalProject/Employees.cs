@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CS3750_FinalProject
 {
-    static class Employees
+    public static class Employees
     {
         public static List<Employee> EmployeesList { get; set; }
     }
