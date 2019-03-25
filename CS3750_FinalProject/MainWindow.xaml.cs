@@ -22,7 +22,6 @@ namespace CS3750_FinalProject
         public MainWindow()
         {
             InitializeComponent();
-            Employees.EmployeesList = new List<Employee>();
             Colleges = new List<College>();
         }
 
@@ -67,6 +66,7 @@ namespace CS3750_FinalProject
                             headers.Add(field);
                         continue;
                     }
+
                     var employee = new Employee
                     {
                         College = fields[headers.IndexOf("CLG")],
@@ -75,7 +75,6 @@ namespace CS3750_FinalProject
                         Rank = fields[headers.IndexOf("RNK")],
                         SalaryAmount = int.Parse(fields[headers.IndexOf("9MSALARY")])
                     };
-                    Employees.EmployeesList.Add(employee);
 
                     if (!Colleges.Any(a => a.CollegeName == fields[headers.IndexOf("CLG")]))
                         Colleges.Add(new College(fields[headers.IndexOf("CLG")]));
@@ -86,7 +85,7 @@ namespace CS3750_FinalProject
                             Departments.Add(new Department(fields[headers.IndexOf("DEPT.")]));
 
                     Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
-                            Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
+                        Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
                 }
             }
         }

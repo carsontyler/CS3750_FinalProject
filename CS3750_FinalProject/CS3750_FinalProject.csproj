@@ -84,7 +84,6 @@
     <Compile Include="College.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Employee.cs" />
-    <Compile Include="Employees.cs" />
     <Compile Include="InversionCalculator.cs" />
     <Compile Include="InversionData.cs" />
     <Compile Include="MainWindow.xaml.cs">

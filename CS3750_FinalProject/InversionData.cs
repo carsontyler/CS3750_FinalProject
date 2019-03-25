@@ -8,12 +8,16 @@ namespace CS3750_FinalProject
 {
     public class InversionData
     {
-        int _amountToFix;
-        int _assistantLessThanInstructor;
-        int _associateLessThanInstructor;
-        int _fullLessThanInstructor;
-        int _associateLessThanAssistant;
-        int _fullLessThanAssistant;
-        int _fullLessThanAssociate;
+        #region Properties
+
+        protected int AmountToFix { get; set; }
+        protected int AssistantLessThanInstructor { get; set; }
+        protected int AssociateLessThanInstructor { get; set; }
+        protected int FullLessThanInstructor { get; set; }
+        protected int AssociateLessThanAssistant { get; set; }
+        protected int FullLessThanAssistant { get; set; }
+        protected int FullLessThanAssociate { get; set; }
+
+        #endregion
     }
 }
