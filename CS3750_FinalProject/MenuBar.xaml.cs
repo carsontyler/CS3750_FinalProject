@@ -81,7 +81,7 @@ namespace CS3750_FinalProject
                         Department = fields[headers.IndexOf("DEPT.")],
                         Name = fields[headers.IndexOf("NAME")],
                         Rank = fields[headers.IndexOf("RNK")],
-                        SalaryAmount = int.Parse(fields[headers.IndexOf("9M FTE SALARY")])
+                        SalaryAmount = int.Parse(fields[headers.IndexOf("9MSALARY")])
                     });
                 }
             }
