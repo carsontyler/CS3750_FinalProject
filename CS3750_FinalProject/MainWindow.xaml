@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:CS3750_FinalProject"
         mc:Ignorable="d"
         Title="Inversion Tracker"
-        Height="450"
-        Width="800">
+        WindowState="Maximized"
+        ResizeMode="NoResize" >
     <Grid>
         <local:MenuBar />
     </Grid>
