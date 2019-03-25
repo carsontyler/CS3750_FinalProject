@@ -23,7 +23,7 @@ namespace CS3750_FinalProject
     public partial class MenuBar : System.Windows.Controls.UserControl
     {
         #region Fields
-
+            
         #endregion
 
         #region Constructor
@@ -31,6 +31,7 @@ namespace CS3750_FinalProject
         public MenuBar()
         {
             InitializeComponent();
+            Colleges = new List<College>();
         }
 
         #endregion
@@ -54,7 +55,7 @@ namespace CS3750_FinalProject
                 Filter = "CSV (*.csv)|*.csv"
             };
 
-            if (filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (filedialog.ShowDialog() == DialogResult.OK)
             {
                 string file = filedialog.FileName;
                 TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
@@ -83,6 +84,8 @@ namespace CS3750_FinalProject
                         Rank = fields[headers.IndexOf("RNK")],
                         SalaryAmount = int.Parse(fields[headers.IndexOf("9MSALARY")])
                     });
+
+                    
                 }
             }
         }
