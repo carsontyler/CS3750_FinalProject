@@ -87,6 +87,8 @@ namespace CS3750_FinalProject
                     Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
                         Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
                 }
+
+                InversionCalculator.CalcInversion(Colleges);
             }
         }
 
