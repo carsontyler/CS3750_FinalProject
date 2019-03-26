@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
 using System.Linq;
+using System.Data;
+using System.ComponentModel;
+using System;
+using System.Windows.Controls;
+using System.Windows.Markup;
+using System.Media;
 
 namespace CS3750_FinalProject
 {
@@ -14,6 +20,7 @@ namespace CS3750_FinalProject
         #region Fields
 
         public List<College> Colleges;
+        public DataTable Inversiontable;
 
         #endregion
 
@@ -30,7 +37,7 @@ namespace CS3750_FinalProject
         #region Methods
 
         #region Private
-        
+
         /// <summary>
         /// Opens a file dialog for the user to choose a CSV file. 
         /// Upon opening the CSV file, and assuming it's in the correct format, an Employee object will be created
@@ -89,11 +96,40 @@ namespace CS3750_FinalProject
                 }
 
                 InversionCalculator.CalcInversion(Colleges);
+                System.Windows.Controls.DataGrid InversionDataView = new System.Windows.Controls.DataGrid();
+                InversionDataView.AlternatingRowBackground =testDataGrid.AlternatingRowBackground;
+                InversionDataView.AlternationCount = testDataGrid.AlternationCount;
+                
+                testDataGrid.ItemsSource = Colleges;
+                
+
+                //DataContainer.Children.Add(InversionDataView);
+
+                //System.Windows.Controls.DataGrid DepartmentDataView = new System.Windows.Controls.DataGrid();
+                //DepartmentDataView.AlternatingRowBackground = testDataGrid.AlternatingRowBackground;
+                //DepartmentDataView.AlternationCount = testDataGrid.AlternationCount;
+                //DepartmentDataView.ItemsSource = Colleges[0].Departments;
+
+                //DataContainer.Children.Add(DepartmentDataView);
             }
         }
 
+        public void FormatCollegesData(List<College> DataList)
+        {
+           
+        }
+
+
         #endregion
 
         #endregion
+
+        private void ExpandRow(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
+
+    
 }

@@ -7,10 +7,26 @@
         mc:Ignorable="d"
         Title="Inversion Tracker"
         WindowState="Maximized"
-        ResizeMode="NoResize" >
-    <Grid>
+        ResizeMode="CanResize" >
+    <Window.Resources>
+        <ControlTemplate x:Key="DataGridTemplate" TargetType="DataGrid">
+            <DataGrid>
+                
+            </DataGrid>
+        </ControlTemplate>
+            
+    </Window.Resources>
+    <Grid x:Name="MainWindowGrid">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="481*"/>
+        </Grid.RowDefinitions>
+
         <Menu x:Name="menuBar" 
               Margin="0"
+              Grid.Row="0"
+              Grid.Column="0"
               Height="25"
               VerticalAlignment="top"
               IsMainMenu="True">
@@ -77,5 +93,24 @@
                       HorizontalAlignment="Left"
                       Height="25" />
         </Menu>
+        
+        <StackPanel x:Name="DataContainer" Grid.Row="1" Grid.Column="0">
+            <DataGrid x:Name="testDataGrid"
+                       AlternatingRowBackground="LightGray" AlternationCount="1"
+                       IsReadOnly="True" Visibility="Visible"
+                       >
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="ExpandRow">+</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </StackPanel>
     </Grid>
 </Window>
