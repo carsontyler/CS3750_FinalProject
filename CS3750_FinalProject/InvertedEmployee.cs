@@ -17,6 +17,7 @@ namespace CS3750_FinalProject
 
         public InvertedEmployee(Employee e, Employee i)
         {
+            Inverted = new Employee();
             Inverted.College = e.College;
             Inverted.Department = e.Department;
             Inverted.Name = e.Name;
@@ -27,6 +28,7 @@ namespace CS3750_FinalProject
         }
         public InvertedEmployee(Employee e)
         {
+            Inverted = new Employee();
             Inverted.College = e.College;
             Inverted.Department = e.Department;
             Inverted.Name = e.Name;
