@@ -4,11 +4,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Linq;
 using System.Data;
-using System.ComponentModel;
-using System;
 using System.Windows.Controls;
-using System.Windows.Markup;
-using System.Media;
 using System.Windows.Media;
 
 namespace CS3750_FinalProject
@@ -36,8 +32,6 @@ namespace CS3750_FinalProject
         #endregion
 
         #region Methods
-
-        #region Private
 
         /// <summary>
         /// Opens a file dialog for the user to choose a CSV file. 
@@ -133,16 +127,14 @@ namespace CS3750_FinalProject
             e.Handled = true;
         }
 
-        #endregion
-
-        #endregion
-
         private void HandleMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             MainScroller.ScrollToVerticalOffset(MainScroller.VerticalOffset - e.Delta);
         }
+
+        #endregion
     }
 
 
-    
+
 }
