@@ -10,7 +10,13 @@ namespace CS3750_FinalProject
     {
         #region Properties
 
-        public int AmountToFix { get; set; }
+        public int TotalAmountToFix { get; set; }
+        public int AssistantLessThanInstructorToFix { get; set; }
+        public int AssociateLessThanInstructorToFix { get;  set; }
+        public int FullLessThanInstructorToFix { get;  set; }
+        public int AssociateLessThanAssistantToFix { get;  set; }
+        public int FullLessThanAssistantToFix { get;  set; }
+        public int FullLessThanAssociateToFix { get;  set; }
         public int AssistantLessThanInstructor { get; set; }
         public int AssociateLessThanInstructor { get; set; }
         public int FullLessThanInstructor { get; set; }
@@ -22,7 +28,13 @@ namespace CS3750_FinalProject
 
         public InversionData()
         {
-            AmountToFix = 0;
+            TotalAmountToFix = 0;
+            AssistantLessThanInstructorToFix = 0;
+            AssociateLessThanInstructorToFix = 0;
+            FullLessThanInstructorToFix = 0;
+            AssociateLessThanAssistantToFix = 0;
+            FullLessThanAssistantToFix = 0;
+            FullLessThanAssociateToFix = 0;
             AssistantLessThanInstructor = 0;
             AssociateLessThanInstructor = 0;
             FullLessThanInstructor = 0;

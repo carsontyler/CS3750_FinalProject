@@ -26,7 +26,17 @@ namespace CS3750_FinalProject
             Name = e.Name;
             Rank = e.Rank;
             SalaryAmount = e.SalaryAmount;
+            Inverters = new List<Employee>();
             Inverters.Add(i);
+        }
+        public InvertedEmployee(Employee e)
+        {
+            College = e.College;
+            Department = e.Department;
+            Name = e.Name;
+            Rank = e.Rank;
+            SalaryAmount = e.SalaryAmount;
+            Inverters = new List<Employee>();
         }
 
         public void AddInverter(Employee e)
