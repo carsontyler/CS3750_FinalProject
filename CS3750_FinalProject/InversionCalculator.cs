@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,37 +10,61 @@ namespace CS3750_FinalProject
 {
     public static class InversionCalculator
     {
-        public static void CalcInversion(List<College> Colleges)
+        public static void CalcInversion(List<College> colleges)
         {
-            foreach (College college in Colleges)
+            foreach (var college in colleges) //loop through colleges
             {
-                foreach (Department department in college.Departments)
+                foreach (var department in college.Departments) //loop through depts
                 {
-                    foreach (Employee inverted in department.Employees)
+                    foreach (var inverted in department.Employees) //loop through employees
                     {
-                        if (inverted.Rank == "Instr")
+                        if (inverted.Rank == "Instr") //ignore instructors
                             continue;
-                        int moneyToFix = 0;
-                        foreach (Employee inverter in department.Employees)
+
+                        var moneyToFix = 0;
+                        var ProfInstr = false;
+                        var ProfAsst = false;
+                        var ProfAsco = false;
+                        var AscoInstr = false;
+
+                        foreach (var inverter in department.Employees) //loop through and compare inverted to inverter
                         {
-                            if (inverted.Rank == inverter.Rank)
+                            if (inverted.Rank == inverter.Rank) //ignore similar ranks
                                 continue;
-                            if (inverted.Rank == "Asst" && (inverter.Rank == "Prof" || inverter.Rank == "Asso"))
-                                continue;
-                            if (inverted.Rank == "Asso" && inverter.Rank == "Prof")
-                                continue;
+                            switch (inverted.Rank) //compare inverted rank and ignore higher ranks
+                            {
+                                case "Asst" when (inverter.Rank == "Prof" || inverter.Rank == "Asso"):
+                                case "Asso" when inverter.Rank == "Prof":
+                                    continue;
+                            }
+
                             if (inverted.SalaryAmount < inverter.SalaryAmount)
                             {
                                 if (moneyToFix < inverter.SalaryAmount - inverted.SalaryAmount)
                                     moneyToFix = inverter.SalaryAmount - inverted.SalaryAmount;
+                            } else continue;
+
+                            switch (inverted.Rank) //compare ranks
+                            {
+                                case "Prof" when inverter.Rank == "Asso":
+                                    department.FullLessThanAssociate += 1;
+                                    break;
+                                case "Prof" when inverter.Rank == "Asst":
+                                    department.FullLessThanAssistant += 1;
+                                    break;
+                                case "Prof" when inverter.Rank == "Instr":
+                                    department.FullLessThanInstructor += 1;
+                                    break;
+                                case "Asso" when inverter.Rank == "Asst":
+                                    department.AssociateLessThanAssistant += 1;
+                                    break;
+                                case "Asso" when inverter.Rank == "Instr":
+                                    department.AssociateLessThanInstructor += 1;
+                                    break;
+                                case "Asst" when inverter.Rank == "Instr":
+                                    department.AssistantLessThanInstructor += 1;
+                                    break;
                             }
-                            else continue;
-                            if (inverted.Rank == "Prof" && inverter.Rank == "Asso") department.FullLessThanAssociate += 1;
-                            else if (inverted.Rank == "Prof" && inverter.Rank == "Asst") department.FullLessThanAssistant += 1;
-                            else if (inverted.Rank == "Prof" && inverter.Rank == "Instr") department.FullLessThanInstructor += 1;
-                            else if (inverted.Rank == "Asso" && inverter.Rank == "Asst") department.AssociateLessThanAssistant += 1;
-                            else if (inverted.Rank == "Asso" && inverter.Rank == "Instr") department.AssociateLessThanInstructor += 1;
-                            else if (inverted.Rank == "Asst" && inverter.Rank == "Instr") department.AssistantLessThanInstructor += 1;
                         }
                         department.AmountToFix += moneyToFix;
                     }

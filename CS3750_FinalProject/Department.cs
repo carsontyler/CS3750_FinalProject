@@ -8,22 +8,14 @@ namespace CS3750_FinalProject
 {
     public class Department : InversionData
     {
-        public List<Employee> InvertedEmployees { get; set; }
+        public List<InvertedEmployee> InvertedEmployees { get; set; }
         public List<Employee> Employees { get; set; }
         public string DepartmentName { get; set; }
-
-        // TODO
-        // Calculate 
-
-        public Department()
-        {
-            InvertedEmployees = new List<Employee>();
-        }
 
         public Department(string department)
         {
             DepartmentName = department;
-            InvertedEmployees = new List<Employee>();
+            InvertedEmployees = new List<InvertedEmployee>();
             Employees = new List<Employee>();
         }
     }
