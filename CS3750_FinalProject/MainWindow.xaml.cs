@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿using System;
+using Microsoft.VisualBasic.FileIO;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
@@ -6,6 +7,8 @@ using System.Linq;
 using System.Data;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 
 namespace CS3750_FinalProject
 {
@@ -130,6 +133,48 @@ namespace CS3750_FinalProject
         private void HandleMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             MainScroller.ScrollToVerticalOffset(MainScroller.VerticalOffset - e.Delta);
+        }
+
+        private void Export(object sender, RoutedEventArgs e)
+        {
+            var excel = new Excel.Application {Visible = false, DisplayAlerts = false};
+
+            var workBook = excel.Workbooks.Add(Type.Missing);
+
+            var workSheet = (Excel.Worksheet)workBook.ActiveSheet;
+            workSheet.Name = "Inversions";
+
+            int rowcount = 0;
+
+            foreach (DataRow dataRow in DataGridCollege.ItemsSource)
+            {
+                rowcount += 1;
+                for (int i = 1; i <= DataGridCollege.Columns.Count; i++)
+                {
+
+                    if (rowcount == 3)
+                    {
+                        workSheet.Cells[2, i] = DataGridCollege.Columns[i - 1];
+
+                    }
+
+                    workSheet.Cells[rowcount, i] = dataRow[i - 1].ToString();
+
+                    if (rowcount > 3)
+                    {
+                        if (i == DataGridCollege.Columns.Count)
+                        {
+
+                        }
+                    }
+
+                }
+
+            }
+
+            workBook.SaveAs("Inversion");
+            workBook.Close();
+            excel.Quit();
         }
 
         #endregion

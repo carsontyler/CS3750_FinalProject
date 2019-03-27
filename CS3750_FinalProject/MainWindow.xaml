@@ -12,7 +12,7 @@
         >
 
     <Window.Resources>
-        
+
         <Style x:Key="CellRightAlign">
             <Setter Property="TextBlock.TextAlignment" Value="Right"/>
         </Style>
@@ -23,9 +23,13 @@
             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid x:Name="MainWindowGrid" MouseWheel="HandleMouseWheel">
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="63*"/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="481*"/>
@@ -37,7 +41,7 @@
               Grid.Column="0"
               Height="25"
               VerticalAlignment="top"
-              IsMainMenu="True">
+              IsMainMenu="True" Grid.ColumnSpan="2">
             <MenuItem Header="File"
                       FontSize="12"
                       Margin="0"
@@ -63,7 +67,8 @@
                           Padding="0,3,0,5"
                           FontSize="12"
                           BorderBrush="LightGray"
-                          BorderThickness="0,0,0,2">
+                          BorderThickness="0,0,0,2"
+                          Click="Export">
                     <MenuItem.Icon>
                         <Image Source="Images/Icons/Export.png"></Image>
                     </MenuItem.Icon>
@@ -101,8 +106,8 @@
                       HorizontalAlignment="Left"
                       Height="25" />
         </Menu>
-       
-        <ScrollViewer x:Name="MainScroller" VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1" MouseWheel="HandleMouseWheel">
+
+        <ScrollViewer x:Name="MainScroller" VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1" MouseWheel="HandleMouseWheel" Grid.ColumnSpan="2">
             <StackPanel x:Name="DataContainer"
                         Grid.Row="1"
                         Grid.Column="0"
