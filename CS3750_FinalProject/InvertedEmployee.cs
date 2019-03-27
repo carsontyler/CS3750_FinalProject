@@ -10,32 +10,28 @@ namespace CS3750_FinalProject
     {
         #region Properties
 
-        public string College { get; set; }
-        public string Department { get; set; }
-        public string Name { get; set; }
-        public string Rank { get; set; }
-        public int SalaryAmount { get; set; }
+        public Employee Inverted { get; set; }
         public List<Employee> Inverters { get; set; }
 
         #endregion
 
         public InvertedEmployee(Employee e, Employee i)
         {
-            College = e.College;
-            Department = e.Department;
-            Name = e.Name;
-            Rank = e.Rank;
-            SalaryAmount = e.SalaryAmount;
+            Inverted.College = e.College;
+            Inverted.Department = e.Department;
+            Inverted.Name = e.Name;
+            Inverted.Rank = e.Rank;
+            Inverted.SalaryAmount = e.SalaryAmount;
             Inverters = new List<Employee>();
             Inverters.Add(i);
         }
         public InvertedEmployee(Employee e)
         {
-            College = e.College;
-            Department = e.Department;
-            Name = e.Name;
-            Rank = e.Rank;
-            SalaryAmount = e.SalaryAmount;
+            Inverted.College = e.College;
+            Inverted.Department = e.Department;
+            Inverted.Name = e.Name;
+            Inverted.Rank = e.Rank;
+            Inverted.SalaryAmount = e.SalaryAmount;
             Inverters = new List<Employee>();
         }
 
