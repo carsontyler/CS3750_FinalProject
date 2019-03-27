@@ -82,34 +82,50 @@ namespace CS3750_FinalProject
                         {
                             department.FullLessThanInstructor++;
                             department.FullLessThanInstructorToFix += moneyToFix;
+                            newIE.FullLessThanInstructor++;
+                            newIE.FullLessThanInstructorToFix += moneyToFix;
                         }
                         else if (ProfAsst)
                         {
                             department.FullLessThanAssistant++;
                             department.FullLessThanAssistantToFix += moneyToFix;
+                            newIE.FullLessThanAssistant++;
+                            newIE.FullLessThanAssistantToFix += moneyToFix;
                         }
                         else if (ProfAsso)
                         {
                             department.FullLessThanAssociate++;
                             department.FullLessThanAssociateToFix += moneyToFix;
+                            newIE.FullLessThanAssociate++;
+                            newIE.FullLessThanAssociateToFix += moneyToFix;
                         }
                         else if (AssoInstr)
                         {
                             department.AssociateLessThanInstructor++;
                             department.AssociateLessThanInstructorToFix += moneyToFix;
+                            newIE.AssociateLessThanInstructor++;
+                            newIE.AssociateLessThanInstructorToFix += moneyToFix;
                         }
                         else if (AssoAsst)
                         {
                             department.AssociateLessThanAssistant++;
                             department.AssociateLessThanAssistantToFix += moneyToFix;
+                            newIE.AssociateLessThanAssistant++;
+                            newIE.AssociateLessThanAssistantToFix += moneyToFix;
                         }
                         else if (AsstInstr) {
                             department.AssistantLessThanInstructor++;
                             department.AssistantLessThanInstructorToFix += moneyToFix;
+                            newIE.AssistantLessThanInstructor++;
+                            newIE.AssistantLessThanInstructorToFix += moneyToFix;
                         }
-                        department.TotalAmountToFix += moneyToFix;
+                       
                         if (invertedYet)
+                        {
+                            department.TotalAmountToFix += moneyToFix;
+                            newIE.TotalAmountToFix += moneyToFix;
                             department.InvertedEmployees.Add(newIE);
+                        }
                     }
                     //Update College values
                     college.TotalAmountToFix += department.TotalAmountToFix;
