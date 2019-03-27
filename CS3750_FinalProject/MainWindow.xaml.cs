@@ -9,6 +9,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Media;
+using System.Windows.Media;
 
 namespace CS3750_FinalProject
 {
@@ -21,7 +22,7 @@ namespace CS3750_FinalProject
 
         public List<College> Colleges;
         public DataTable Inversiontable;
-
+       
         #endregion
 
         #region Constructor
@@ -96,37 +97,49 @@ namespace CS3750_FinalProject
                 }
 
                 InversionCalculator.CalcInversion(Colleges);
-                System.Windows.Controls.DataGrid InversionDataView = new System.Windows.Controls.DataGrid();
-                InversionDataView.AlternatingRowBackground =testDataGrid.AlternatingRowBackground;
-                InversionDataView.AlternationCount = testDataGrid.AlternationCount;
                 
-                testDataGrid.ItemsSource = Colleges;
-                
-
-                //DataContainer.Children.Add(InversionDataView);
-
-                //System.Windows.Controls.DataGrid DepartmentDataView = new System.Windows.Controls.DataGrid();
-                //DepartmentDataView.AlternatingRowBackground = testDataGrid.AlternatingRowBackground;
-                //DepartmentDataView.AlternationCount = testDataGrid.AlternationCount;
-                //DepartmentDataView.ItemsSource = Colleges[0].Departments;
-
-                //DataContainer.Children.Add(DepartmentDataView);
+                DataGridCollege.ItemsSource = Colleges;
             }
         }
 
-        public void FormatCollegesData(List<College> DataList)
-        {
-           
-        }
-
-
-        #endregion
-
-        #endregion
-
         private void ExpandRow(object sender, RoutedEventArgs e)
         {
+            DependencyObject obj = (DependencyObject)e.OriginalSource;
+            while (!(obj is DataGridRow) && obj != null) obj = VisualTreeHelper.GetParent(obj);
 
+            if (obj is DataGridRow)
+            {
+                if ((obj as DataGridRow).DetailsVisibility == Visibility.Visible)
+                {
+                    (obj as DataGridRow).DetailsVisibility = Visibility.Collapsed;
+                    System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
+                    btn = sender as System.Windows.Controls.Button;
+                    btn.Content = "+";
+                }
+                else
+                {
+                    (obj as DataGridRow).DetailsVisibility = Visibility.Visible;
+                    System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
+                    btn = sender as System.Windows.Controls.Button;
+                    btn.Content = "-";
+                }
+            }
+        }
+
+        private void ListViewScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
+
+        #endregion
+
+        #endregion
+
+        private void HandleMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            MainScroller.ScrollToVerticalOffset(MainScroller.VerticalOffset - e.Delta);
         }
     }
 
