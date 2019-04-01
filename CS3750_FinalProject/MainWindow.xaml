@@ -211,7 +211,7 @@
                                                 Binding="{Binding CollegeName}"
                                                 CellStyle="{StaticResource CellLeftAlign}" />
                             <DataGridTextColumn Header="Amount To Fix"
-                                                Binding="{Binding AmountToFix, StringFormat={}{0:C}}"
+                                                Binding="{Binding TotalAmountToFix, StringFormat={}{0:C}}"
                                                 CellStyle="{StaticResource CellRightAlign}" />
                             <DataGridTextColumn Header="Assistant &lt; Instructor"
                                                 Binding="{Binding AssistantLessThanInstructor}"
@@ -254,7 +254,7 @@
                                                             Binding="{Binding DepartmentName, StringFormat={}{0:C}}"
                                                             CellStyle="{StaticResource CellLeftAlign}" />
                                         <DataGridTextColumn Header="Amount To Fix"
-                                                            Binding="{Binding AmountToFix, StringFormat={}{0:C}}"
+                                                            Binding="{Binding TotalAmountToFix, StringFormat={}{0:C}}"
                                                             CellStyle="{StaticResource CellRightAlign}" />
                                         <DataGridTextColumn Header="Assistant &lt; Instructor"
                                                             Binding="{Binding AssistantLessThanInstructor}"
