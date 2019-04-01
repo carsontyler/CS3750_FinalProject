@@ -10,7 +10,8 @@
                       Title="Inversion Tracker"
                       WindowState="Maximized"
                       ResizeMode="CanResize"
-                      MouseWheel="HandleMouseWheel">
+                      MouseWheel="HandleMouseWheel"
+                      FontFamily="TradeGothic">
     <Window.Resources>
         <Style x:Key="CellStyle"
                TargetType="DataGridCell">
@@ -143,7 +144,8 @@
         </Grid>
 
         <Grid x:Name="InversionDataView"
-              Grid.Row="1">
+              Grid.Row="1"
+              Visibility="Collapsed">
             <ScrollViewer x:Name="MainScroller"
                           VerticalScrollBarVisibility="Auto"
                           Grid.Column="0"
@@ -271,10 +273,53 @@
               Grid.Row="1"
               Visibility="Collapsed">
         </Grid>
-        <Button x:Name="OpenButton"
-                Content="Click to Open"
-                FontSize="100"
-                Grid.Row="1"
-                Click="Open_File" />
+        <Grid x:Name="HomeScreen"
+              Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*" />
+                <RowDefinition Height="50*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Margin="10"
+                       Source="Images/wsu1.png" />
+                <Grid Grid.Column="1"
+                      TextBlock.TextAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70*" />
+                        <RowDefinition Height="50*" />
+                        <RowDefinition Height="15*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               TextBlock.FontSize="100"
+                               VerticalAlignment="Center">
+                        Salary Inverison
+                    </TextBlock>
+                    <TextBlock TextBlock.FontSize="30"
+                               Grid.Row="1"
+                               VerticalAlignment="Top"> 
+                        Subcommittee on Salary Inversion <LineBreak />
+                        Salary, Benefits, Budget, and Fiscal Planning Committee
+                        <LineBreak />2018-2019 Data
+                    </TextBlock>
+                    <Button Grid.Row="2"
+                            Content="Open File"
+                            Margin="129,1.6,128.8,-0.2" 
+                            Click="Open_File"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="Images/wsu3.png"
+                       Margin="10" />
+            </Grid>
+        </Grid>
     </Grid>
 </Controls:MetroWindow>

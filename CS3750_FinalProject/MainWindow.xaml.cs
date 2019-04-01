@@ -97,7 +97,8 @@ namespace CS3750_FinalProject
                 InversionCalculator.CalcInversion(Colleges);
                 
                 DataGridCollege.ItemsSource = Colleges;
-                OpenButton.Visibility = Visibility.Hidden;
+                HomeScreen.Visibility = Visibility.Hidden;
+                InversionDataView.Visibility = Visibility.Visible;
             }
         }
 
@@ -181,12 +182,14 @@ namespace CS3750_FinalProject
 
         private void ShowDataGrid(object sender, RoutedEventArgs e)
         {
+            HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
             SummaryView.Visibility = Visibility.Collapsed;
         }
 
         private void ShowSummary(object sender, RoutedEventArgs e)
         {
+            HomeScreen.Visibility = Visibility.Hidden;
             SummaryView.Visibility = Visibility.Visible;
             InversionDataView.Visibility = Visibility.Collapsed;
         }
