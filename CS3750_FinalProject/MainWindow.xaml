@@ -67,16 +67,14 @@
                           Width="40"
                           Height="40"
                           HorizontalAlignment="Center">
-                    <MenuItem.Header>
-                        <TextBlock HorizontalAlignment="Center" />
-                    </MenuItem.Header>
                     <MenuItem.Icon>
                         <Viewbox>
                             <iconPacks:PackIconMaterial Kind="ViewSequential"
                                                         VerticalAlignment="Center"
                                                         HorizontalAlignment="Center"
                                                         Height="30"
-                                                        Width="30" />
+                                                        Width="30"
+                                                        Foreground="#492365" />
                         </Viewbox>
                     </MenuItem.Icon>
                     <MenuItem Header="Open"
@@ -84,14 +82,28 @@
                               FontSize="12"
                               Click="Open_File">
                         <MenuItem.Icon>
-                            <Image Source="Images/Icons/Open.png"></Image>
+                            <Viewbox>
+                                <iconPacks:PackIconMaterial Kind="FolderImage"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            Height="30"
+                                                            Width="30"
+                                                            Foreground="#492365" />
+                            </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Save"
                               Margin="0"
                               FontSize="12">
                         <MenuItem.Icon>
-                            <Image Source="Images/Icons/Save.png"></Image>
+                            <Viewbox>
+                                <iconPacks:PackIconMaterial Kind="Floppy"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            Height="30"
+                                                            Width="30"
+                                                            Foreground="#492365" />
+                            </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Export"
@@ -101,7 +113,14 @@
                               BorderThickness="0,0,0,2"
                               Click="Export">
                         <MenuItem.Icon>
-                            <Image Source="Images/Icons/Export.png"></Image>
+                            <Viewbox>
+                                <iconPacks:PackIconMaterial Kind="ExitToApp"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            Height="30"
+                                                            Width="30"
+                                                            Foreground="#492365"/>
+                            </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Print"
@@ -110,13 +129,30 @@
                               Padding="0,3,0,5"
                               BorderBrush="LightGray"
                               BorderThickness="0,0,0,2">
+                        <MenuItem.Icon>
+                            <Viewbox>
+                                <iconPacks:PackIconMaterial Kind="Printer"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            Height="30"
+                                                            Width="30"
+                                                            Foreground="#492365" />
+                            </Viewbox>
+                        </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Quit"
                               FontSize="12"
                               Margin="0"
                               Padding="0,3,0,5">
                         <MenuItem.Icon>
-                            <Image Source="Images/Icons/Exit.png"></Image>
+                            <Viewbox>
+                                <iconPacks:PackIconMaterial Kind="XamarinOutline"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center"
+                                                            Height="30"
+                                                            Width="30"
+                                                            Foreground="#492365" />
+                            </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -296,20 +332,22 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
                                TextBlock.FontSize="100"
-                               VerticalAlignment="Center">
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
                         Salary Inverison
                     </TextBlock>
                     <TextBlock TextBlock.FontSize="30"
                                Grid.Row="1"
-                               VerticalAlignment="Top"> 
+                               VerticalAlignment="Top"
+                               TextWrapping="Wrap"> 
                         Subcommittee on Salary Inversion <LineBreak />
                         Salary, Benefits, Budget, and Fiscal Planning Committee
                         <LineBreak />2018-2019 Data
                     </TextBlock>
                     <Button Grid.Row="2"
                             Content="Open File"
-                            Margin="129,1.6,128.8,-0.2" 
-                            Click="Open_File"/>
+                            Margin="129,1.6,128.8,-0.2"
+                            Click="Open_File" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
