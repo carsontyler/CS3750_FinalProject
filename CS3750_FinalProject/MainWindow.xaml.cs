@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Media;
 using System.Windows.Media;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace CS3750_FinalProject
 {
@@ -22,7 +24,13 @@ namespace CS3750_FinalProject
 
         public List<College> Colleges;
         public DataTable Inversiontable;
-       
+        public SeriesCollection SeriesCollectionLineChart { get; set; }
+        public SeriesCollection SeriesCollectionBarChart { get; set; }
+        public string[] LabelsLineChart { get; set; }
+        public string[] LabelsBarChart { get; set; }
+        public Func<double, string> YFormatterLineChart { get; set; }
+        public Func<double, string> YFormatterBarChart { get; set; }
+
         #endregion
 
         #region Constructor
@@ -31,7 +39,83 @@ namespace CS3750_FinalProject
         {
             InitializeComponent();
             Colleges = new List<College>();
+            LineChart();
+            BarChart();
         }
+
+        private void BarChart()
+        {
+            SeriesCollectionBarChart = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "2015",
+                    Values = new ChartValues<double> { 10, 50, 39, 50 }
+                }
+            };
+
+            //adding series will update and animate the chart automatically
+            SeriesCollectionBarChart.Add(new ColumnSeries
+            {
+                Title = "2016",
+                Values = new ChartValues<double> { 11, 56, 42 }
+            });
+
+            //also adding values updates and animates the chart automatically
+            SeriesCollectionBarChart[1].Values.Add(48d);
+
+            LabelsBarChart = new[] { "Maria", "Susan", "Charles", "Frida" };
+            YFormatterBarChart = value => value.ToString("N");
+
+            DataContext = this;
+        }
+    
+
+        private void LineChart()
+        {
+            SeriesCollectionLineChart = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Series 1",
+                    Values = new ChartValues<double> { 4, 6, 5, 2 ,4 }
+                },
+                new LineSeries
+                {
+                    Title = "Series 2",
+                    Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
+                    PointGeometry = null
+                },
+                new LineSeries
+                {
+                    Title = "Series 3",
+                    Values = new ChartValues<double> { 4,2,7,2,7 },
+                    PointGeometry = DefaultGeometries.Square,
+                    PointGeometrySize = 15
+                }
+            };
+
+            LabelsLineChart = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
+            YFormatterLineChart = value => value.ToString("C");
+
+            //modifying the series collection will animate and update the chart
+            SeriesCollectionLineChart.Add(new LineSeries
+            {
+                Title = "Series 4",
+                Values = new ChartValues<double> { 5, 3, 2, 4 },
+                LineSmoothness = 0, //0: straight lines, 1: really smooth lines
+                PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
+                PointGeometrySize = 50,
+                PointForeground = Brushes.Gray
+            });
+
+            //modifying any series values will also animate and update the chart
+            SeriesCollectionLineChart[3].Values.Add(5d);
+
+            DataContext = this;
+        }
+    
+
 
         #endregion
 
@@ -97,7 +181,7 @@ namespace CS3750_FinalProject
                 }
 
                 InversionCalculator.CalcInversion(Colleges);
-                
+
                 DataGridCollege.ItemsSource = Colleges;
             }
         }
@@ -141,8 +225,10 @@ namespace CS3750_FinalProject
         {
             MainScroller.ScrollToVerticalOffset(MainScroller.VerticalOffset - e.Delta);
         }
+
+
     }
+}
 
 
     
-}

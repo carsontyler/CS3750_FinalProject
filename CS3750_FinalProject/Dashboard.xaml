@@ -1,0 +1,34 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CS3750_FinalProject"
+        xmlns:UserControls="clr-namespace:CS3750_FinalProject.UserControls" x:Class="CS3750_FinalProject.Dashboard"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Dashboard" Height="1035" Width="1644.5">
+    <Grid>
+
+
+
+        <UserControls:LineChart HorizontalAlignment="Left" Height="515" Margin="540,166,0,0" VerticalAlignment="Top" Width="990" Loaded="LineChart_Loaded"/>
+
+        <StackPanel x:Name="LeftNavigation" HorizontalAlignment="Right" Height="1004" VerticalAlignment="Top" Width="418" Margin="0,0,1218,0" Background="Gray">
+            <Label x:Name="Summary_Copy6" Content="Year: 2019" Foreground="White" FontSize="72"/>
+            <Label x:Name="Summary" Content="Summary" Foreground="White" FontSize="36"/>
+            <Label x:Name="Summary_Copy" Content="Summary" Foreground="White" HorizontalAlignment="Center" FontSize="22"/>
+            <Label x:Name="Summary_Copy1" Content="Summary" Foreground="White" HorizontalAlignment="Center" FontSize="22"/>
+            <Label x:Name="Summary_Copy2" Content="Summary" Foreground="White" HorizontalAlignment="Center" FontSize="22"/>
+            <Label x:Name="Summary_Copy3" Content="Summary" Foreground="White" HorizontalAlignment="Center" FontSize="22"/>
+            <Label x:Name="Summary_Copy4" Content="Summary" Foreground="White" HorizontalAlignment="Center" FontSize="22"/>
+            <Label x:Name="Summary_Copy5" Content="Compare" Foreground="White" FontSize="36" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="110" Margin="418,0,0,0" VerticalAlignment="Top" Width="1218" Background="Gray">
+            <Label x:Name="Dashboard1" Content="Dashboard" Foreground="White" FontSize="36"/>
+        </StackPanel>
+        <Label Content="Sunburst" HorizontalAlignment="Left" Height="84" Margin="1180,789,0,0" VerticalAlignment="Top" Width="288"/>
+        <Label Content="Circle Packing&#xD;&#xA;" HorizontalAlignment="Left" Height="84" Margin="650,789,0,0" VerticalAlignment="Top" Width="288"/>
+
+    </Grid>
+</Window>
