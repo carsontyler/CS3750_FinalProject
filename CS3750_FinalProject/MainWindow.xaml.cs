@@ -8,6 +8,7 @@ using System.Data;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Excel = Microsoft.Office.Interop.Excel;
+using MahApps.Metro.Controls;
 using System.Runtime.InteropServices;
 
 namespace CS3750_FinalProject
@@ -15,7 +16,7 @@ namespace CS3750_FinalProject
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         #region Fields
 
@@ -96,6 +97,7 @@ namespace CS3750_FinalProject
                 InversionCalculator.CalcInversion(Colleges);
                 
                 DataGridCollege.ItemsSource = Colleges;
+                OpenButton.Visibility = Visibility.Hidden;
             }
         }
 
@@ -177,9 +179,19 @@ namespace CS3750_FinalProject
             excel.Quit();
         }
 
+        private void ShowDataGrid(object sender, RoutedEventArgs e)
+        {
+            InversionDataView.Visibility = Visibility.Visible;
+            SummaryView.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowSummary(object sender, RoutedEventArgs e)
+        {
+            SummaryView.Visibility = Visibility.Visible;
+            InversionDataView.Visibility = Visibility.Collapsed;
+        }
+
         #endregion
     }
-
-
 
 }
