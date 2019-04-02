@@ -194,7 +194,12 @@ namespace CS3750_FinalProject
             InversionDataView.Visibility = Visibility.Collapsed;
         }
 
+        private void Quit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         #endregion
+
     }
 
 }

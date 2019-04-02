@@ -143,7 +143,7 @@
                     <MenuItem Header="Quit"
                               FontSize="12"
                               Margin="0"
-                              Padding="0,3,0,5">
+                              Padding="0,3,0,5" Click="Quit">
                         <MenuItem.Icon>
                             <Viewbox>
                                 <iconPacks:PackIconMaterial Kind="XamarinOutline"
