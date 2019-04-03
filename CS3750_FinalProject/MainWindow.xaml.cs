@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Linq;
 using System.Data;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media;
 using MahApps.Metro.Controls;
@@ -155,6 +156,29 @@ namespace CS3750_FinalProject
 
         private void Export(object sender, RoutedEventArgs e)
         {
+            IWorkbook workbook = new XSSFWorkbook();
+            
+            ISheet sheet1 = workbook.CreateSheet("Sheet1");
+
+            sheet1.CreateRow(0).CreateCell(0).SetCellValue("This is a Sample");
+            
+            int x = 1;
+            
+            for (int i = 1; i <= 15; i++)
+            {
+                IRow row = sheet1.CreateRow(i);
+                
+                for (int j = 0; j < 15; j++)
+                {
+                    row.CreateCell(j).SetCellValue(x++);
+                }
+            }
+
+            FileStream sw = File.Create("test.xls");
+
+            workbook.Write(sw);
+
+            File.Open("test.xlsx", FileMode.Open);
         }
 
         private void ShowDataGrid(object sender, RoutedEventArgs e)
