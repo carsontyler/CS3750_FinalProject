@@ -143,7 +143,7 @@
                     <MenuItem Header="Quit"
                               FontSize="12"
                               Margin="0"
-                              Padding="0,3,0,5">
+                              Padding="0,3,0,5" Click="Quit">
                         <MenuItem.Icon>
                             <Viewbox>
                                 <iconPacks:PackIconMaterial Kind="XamarinOutline"
@@ -213,7 +213,7 @@
                                                 Binding="{Binding CollegeName}"
                                                 CellStyle="{StaticResource CellLeftAlign}" />
                             <DataGridTextColumn Header="Amount To Fix"
-                                                Binding="{Binding AmountToFix, StringFormat={}{0:C}}"
+                                                Binding="{Binding TotalAmountToFix, StringFormat={}{0:C}}"
                                                 CellStyle="{StaticResource CellRightAlign}" />
                             <DataGridTextColumn Header="Assistant &lt; Instructor"
                                                 Binding="{Binding AssistantLessThanInstructor}"
@@ -256,7 +256,7 @@
                                                             Binding="{Binding DepartmentName, StringFormat={}{0:C}}"
                                                             CellStyle="{StaticResource CellLeftAlign}" />
                                         <DataGridTextColumn Header="Amount To Fix"
-                                                            Binding="{Binding AmountToFix, StringFormat={}{0:C}}"
+                                                            Binding="{Binding TotalAmountToFix, StringFormat={}{0:C}}"
                                                             CellStyle="{StaticResource CellRightAlign}" />
                                         <DataGridTextColumn Header="Assistant &lt; Instructor"
                                                             Binding="{Binding AssistantLessThanInstructor}"
