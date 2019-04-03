@@ -78,7 +78,9 @@
                         </Viewbox>
                     </MenuItem.Icon>
                     <MenuItem Header="Open"
+                              Padding="0,3,0,5"
                               Margin="0"
+                              Width="150"
                               FontSize="12"
                               Click="Open_File">
                         <MenuItem.Icon>
@@ -86,13 +88,14 @@
                                 <iconPacks:PackIconMaterial Kind="FolderImage"
                                                             VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"
-                                                            Height="30"
-                                                            Width="30"
+                                                            Height="15"
+                                                            Width="15"
                                                             Foreground="#492365" />
                             </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Save"
+                              Padding="0,3,0,5"
                               Margin="0"
                               FontSize="12">
                         <MenuItem.Icon>
@@ -100,8 +103,8 @@
                                 <iconPacks:PackIconMaterial Kind="Floppy"
                                                             VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"
-                                                            Height="30"
-                                                            Width="30"
+                                                            Height="15"
+                                                            Width="15"
                                                             Foreground="#492365" />
                             </Viewbox>
                         </MenuItem.Icon>
@@ -110,16 +113,16 @@
                               Padding="0,3,0,5"
                               FontSize="12"
                               BorderBrush="LightGray"
-                              BorderThickness="0,0,0,2"
+                              BorderThickness="0,0,0,1"
                               Click="Export">
                         <MenuItem.Icon>
                             <Viewbox>
                                 <iconPacks:PackIconMaterial Kind="ExitToApp"
                                                             VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"
-                                                            Height="30"
-                                                            Width="30"
-                                                            Foreground="#492365"/>
+                                                            Height="15"
+                                                            Width="15"
+                                                            Foreground="#492365" />
                             </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
@@ -134,8 +137,8 @@
                                 <iconPacks:PackIconMaterial Kind="Printer"
                                                             VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"
-                                                            Height="30"
-                                                            Width="30"
+                                                            Height="15"
+                                                            Width="15"
                                                             Foreground="#492365" />
                             </Viewbox>
                         </MenuItem.Icon>
@@ -143,14 +146,15 @@
                     <MenuItem Header="Quit"
                               FontSize="12"
                               Margin="0"
-                              Padding="0,3,0,5" Click="Quit">
+                              Padding="0,3,0,5"
+                              Click="Quit">
                         <MenuItem.Icon>
                             <Viewbox>
                                 <iconPacks:PackIconMaterial Kind="XamarinOutline"
                                                             VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"
-                                                            Height="30"
-                                                            Width="30"
+                                                            Height="15"
+                                                            Width="15"
                                                             Foreground="#492365" />
                             </Viewbox>
                         </MenuItem.Icon>

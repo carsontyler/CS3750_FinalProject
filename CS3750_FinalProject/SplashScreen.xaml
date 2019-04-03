@@ -1,0 +1,101 @@
+﻿<Window x:Class="CS3750_FinalProject.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CS3750_FinalProject"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="SplashScreen"
+        WindowStartupLocation="CenterScreen"
+        Height="270"
+        Width="480"
+        ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="Images/wsu3.png"></ImageBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="White"
+                             Opacity=".2" />
+        </Grid.Background>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150*" />
+                <RowDefinition Height="150*" />
+                <RowDefinition Height="25*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        Margin="20">
+                <Image RenderOptions.BitmapScalingMode="Fant"
+                       Height="80"
+                       Source="Images/wsu4.png" />
+                <TextBlock TextBlock.FontSize="45"
+                           TextBlock.FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="Salary Inversion">
+                </TextBlock>
+                <StackPanel.Background>
+                    <SolidColorBrush Color="White"
+                                     Opacity=".65" />
+                </StackPanel.Background>
+            </StackPanel>
+            <Grid Grid.Row="1"
+                  TextBlock.TextAlignment="Center"
+                  Margin="0,1,-0.4,0.4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*" />
+                    <RowDefinition Height="22*" />
+                </Grid.RowDefinitions>
+                <TextBlock TextBlock.FontSize="20"
+                           Grid.Row="0"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="20,0,20,0"
+                           Text="Subcommittee on Salary Inversion
+                           Salary, Benefits, Budget, and Fiscal Planning Committee">
+                    <TextBlock.Background>
+                        <SolidColorBrush Color="White"
+                                         Opacity=".65" />
+                    </TextBlock.Background>
+                </TextBlock>
+                <Button Content="Open File"
+                        Click="Open_File"
+                        Grid.Row="2"
+                        Width="200"
+                        FontSize="13"
+                        Margin="20,0,0,0"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        HorizontalAlignment="Left">
+                    <Button.Background>
+                        <SolidColorBrush Color="White"
+                                         Opacity=".7" />
+                    </Button.Background>
+                </Button>
+                <Button Content="Exit"
+                        Click="Exit"
+                        Grid.Row="2"
+                        Width="200"
+                        FontSize="13"
+                        Margin="0,0,20,0"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        HorizontalAlignment="Right">
+                    <Button.Background>
+                        <SolidColorBrush Color="White"
+                                         Opacity=".7" />
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <TextBlock Grid.Row="2"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"
+                       FontSize="9"
+                       Foreground="DarkGray">
+                Created By: Andrew Nilson, Carson Tyler, Tyler Davies, Cody Alves, Tammy Platero, 2019
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>
