@@ -147,7 +147,6 @@ namespace CS3750_FinalProject
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
         }
-
         private void HandleMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             MainScroller.ScrollToVerticalOffset(MainScroller.VerticalOffset - e.Delta);

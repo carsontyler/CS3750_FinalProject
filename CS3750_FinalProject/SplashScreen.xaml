@@ -12,7 +12,7 @@
         Width="480"
         ResizeMode="NoResize">
     <Window.Background>
-        <ImageBrush ImageSource="Images/wsu3.png"></ImageBrush>
+        <ImageBrush ImageSource="Images/WeberCampus.png"></ImageBrush>
     </Window.Background>
     <Grid>
         <Grid.Background>
@@ -29,7 +29,7 @@
                         Margin="20">
                 <Image RenderOptions.BitmapScalingMode="Fant"
                        Height="80"
-                       Source="Images/wsu4.png" />
+                       Source="Images/WLogo.png" />
                 <TextBlock TextBlock.FontSize="45"
                            TextBlock.FontWeight="Bold"
                            VerticalAlignment="Center"
@@ -68,7 +68,8 @@
                         Margin="20,0,0,0"
                         BorderBrush="Black"
                         BorderThickness="2"
-                        HorizontalAlignment="Left">
+                        HorizontalAlignment="Left"
+                        Style="{DynamicResource SquareButtonStyle}">
                     <Button.Background>
                         <SolidColorBrush Color="White"
                                          Opacity=".7" />
@@ -82,7 +83,8 @@
                         Margin="0,0,20,0"
                         BorderBrush="Black"
                         BorderThickness="2"
-                        HorizontalAlignment="Right">
+                        HorizontalAlignment="Right"
+                        Style="{DynamicResource SquareButtonStyle}">
                     <Button.Background>
                         <SolidColorBrush Color="White"
                                          Opacity=".7" />
