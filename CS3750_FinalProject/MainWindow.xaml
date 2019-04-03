@@ -166,6 +166,7 @@
                     FontSize="16"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
+                    Foreground="#492365"
                     Click="ShowDataGrid">Data Grid</Button>
             <Button x:Name="SummaryButton"
                     Grid.Column="2"
@@ -176,6 +177,7 @@
                     FontSize="16"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
+                    Foreground="#492365"
                     Click="ShowSummary">Summary</Button>
         </Grid>
 
