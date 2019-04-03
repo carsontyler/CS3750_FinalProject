@@ -10,7 +10,6 @@
                       Title="Inversion Tracker"
                       WindowState="Maximized"
                       ResizeMode="CanResize"
-                      MouseWheel="HandleMouseWheel"
                       FontFamily="TradeGothic">
     <Window.Resources>
         <Style x:Key="CellStyle"
@@ -42,8 +41,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid x:Name="MainWindowGrid"
-          MouseWheel="HandleMouseWheel">
+    <Grid x:Name="MainWindowGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="481*" />
@@ -171,6 +169,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Foreground="#492365"
+                    Style="{DynamicResource SquareButtonStyle}"
                     Click="ShowDataGrid">Data Grid</Button>
             <Button x:Name="SummaryButton"
                     Grid.Column="2"
@@ -182,6 +181,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Foreground="#492365"
+                    Style="{DynamicResource SquareButtonStyle}"
                     Click="ShowSummary">Summary</Button>
         </Grid>
 
@@ -192,18 +192,16 @@
                           VerticalScrollBarVisibility="Auto"
                           Grid.Column="0"
                           Grid.Row="1"
-                          MouseWheel="HandleMouseWheel"
-                          Grid.ColumnSpan="2">
+                          Grid.ColumnSpan="2"
+                          PreviewMouseWheel="ListViewScrollViewer_PreviewMouseWheel">
                 <StackPanel x:Name="DataContainer"
                             Grid.Row="1"
-                            Grid.Column="0"
-                            MouseWheel="HandleMouseWheel">
+                            Grid.Column="0">
                     <DataGrid x:Name="DataGridCollege"
                               IsReadOnly="True"
                               Visibility="Visible"
                               RowDetailsVisibilityMode="Collapsed"
                               AutoGenerateColumns="False"
-                              MouseWheel="HandleMouseWheel"
                               CellStyle="{StaticResource CellStyle}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
@@ -246,8 +244,7 @@
                                           Visibility="Visible"
                                           Margin="20,2,0,0"
                                           RowDetailsVisibilityMode="Collapsed"
-                                          AutoGenerateColumns="False"
-                                          MouseWheel="HandleMouseWheel">
+                                          AutoGenerateColumns="False">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
@@ -289,8 +286,7 @@
                                                       Visibility="Visible"
                                                       Margin="20,2,0,0"
                                                       RowDetailsVisibilityMode="Collapsed"
-                                                      AutoGenerateColumns="True"
-                                                      MouseWheel="HandleMouseWheel">
+                                                      AutoGenerateColumns="True">
                                             </DataGrid>
                                         </DataTemplate>
                                     </DataGrid.RowDetailsTemplate>
@@ -328,7 +324,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0"
                        Margin="10"
-                       Source="Images/wsu1.png" />
+                       Source="Images/WLogoFull.png" />
                 <Grid Grid.Column="1"
                       TextBlock.TextAlignment="Center">
                     <Grid.RowDefinitions>
@@ -361,7 +357,7 @@
                     <ColumnDefinition Width="100*" />
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0"
-                       Source="Images/wsu3.png"
+                       Source="Images/WeberStatue.png"
                        Margin="10" />
             </Grid>
         </Grid>
