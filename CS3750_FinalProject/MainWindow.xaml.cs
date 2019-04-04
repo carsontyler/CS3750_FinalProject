@@ -120,25 +120,29 @@ namespace CS3750_FinalProject
             InversionDataView.Visibility = Visibility.Visible;
         }
 
-        private List<KeyValuePair<string, int>> LoadLineChartData()
+        private void LoadLineChartData()
         {
-            var length = Colleges.Count();
-            var key = Colleges[0].CollegeName;
-            var value = Colleges[0].TotalAmountToFix;
+            List<KeyValuePair<string, int>> AmountToFixList = new List<KeyValuePair<string, int>>();
+            List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
 
-            List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>();
-            
             for (int i = 0; i < Colleges.Count(); i++)
             {
                 var keyToAdd = Colleges[i].CollegeName;
                 var valueToAdd = Colleges[i].TotalAmountToFix;
-                kvpList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
-
+                AmountToFixList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
             }
 
-            ((LineSeries)lineChart.Series[0]).ItemsSource = kvpList;
-            return kvpList;
+            for (int i = 0; i < Colleges.Count(); i++)
+            {
+                var keyToAdd = Colleges[i].CollegeName;
+                var valueToAdd = Colleges[i].FullLessThanAssistantToFix;
+                NumberOfInversions.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+            }
 
+            var dataSourceList = new List<List<KeyValuePair<string, int>>>();
+            dataSourceList.Add(AmountToFixList);
+            dataSourceList.Add(NumberOfInversions);
+            lineChart.DataContext = dataSourceList;
         }
 
         private void ExpandRow(object sender, RoutedEventArgs e)

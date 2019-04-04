@@ -315,13 +315,26 @@
               Visibility="Collapsed">
 
             <dvck:Chart Name="lineChart"
-                Width="800" Height="800"  
-                Background="LightBlue">
+                        Title="College Overview"
+                        VerticalAlignment="Top"
+                        Margin="0,58,58,0" 
+                        Height="382"
+                        Grid.Column="1">
                 <dvck:Chart.Series>
-                    <dvck:LineSeries Title="Amount To Fix"
+
+                    <dvck:LineSeries Name="AmountToFix" 
+                                     Title="Amount To Fix"
                                      IndependentValueBinding="{Binding Path=Key}"
-                                     DependentValueBinding="{Binding Path=Value}">
-                    </dvck:LineSeries>
+                                     DependentValueBinding="{Binding Path=Value}"
+                                     ItemsSource="{Binding [0]}"
+                                     IsSelectionEnabled="True" />
+                    <dvck:LineSeries Name="NumberOfInversions"
+                                     Title="Number of Inversions"
+                                     IndependentValueBinding="{Binding Path=Key}"
+                                     DependentValueBinding="{Binding Path=Value}"
+                                     ItemsSource="{Binding [1]}"
+                                     IsSelectionEnabled="True" />
+
                 </dvck:Chart.Series>
             </dvck:Chart>
         </Grid>
