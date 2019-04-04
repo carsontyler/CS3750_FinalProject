@@ -122,13 +122,19 @@ namespace CS3750_FinalProject
 
         private List<KeyValuePair<string, int>> LoadLineChartData()
         {
+            var length = Colleges.Count();
             var key = Colleges[0].CollegeName;
             var value = Colleges[0].TotalAmountToFix;
 
-            List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>()
+            List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>();
+            
+            for (int i = 0; i < Colleges.Count(); i++)
             {
-                new KeyValuePair<string, int>(key, value)
-            };
+                var keyToAdd = Colleges[i].CollegeName;
+                var valueToAdd = Colleges[i].TotalAmountToFix;
+                kvpList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+
+            }
 
             ((LineSeries)lineChart.Series[0]).ItemsSource = kvpList;
             return kvpList;

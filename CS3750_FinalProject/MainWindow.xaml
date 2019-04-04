@@ -315,7 +315,7 @@
               Visibility="Collapsed">
 
             <dvck:Chart Name="lineChart"
-                Width="400" Height="250"  
+                Width="800" Height="800"  
                 Background="LightBlue">
                 <dvck:Chart.Series>
                     <dvck:LineSeries Title="Amount To Fix"
