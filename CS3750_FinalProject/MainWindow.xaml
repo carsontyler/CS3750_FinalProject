@@ -316,7 +316,8 @@
 
             <dvck:Chart Name="lineChart"
                 Width="800" Height="800"  
-                Background="LightBlue">
+                Background="LightBlue" 
+                HorizontalAlignment="Left">
                 <dvck:Chart.Series>
                     <dvck:LineSeries Title="Amount To Fix"
                                      IndependentValueBinding="{Binding Path=Key}"
@@ -324,6 +325,19 @@
                     </dvck:LineSeries>
                 </dvck:Chart.Series>
             </dvck:Chart>
+            
+            <dvck:Chart Name="pieChart"
+                Width="800" Height="800"
+                HorizontalAlignment="Right">
+                <dvck:Chart.Series>
+                    <dvck:PieSeries Title="Visualization" 
+                                    IndependentValueBinding="{Binding Path=Key}" 
+                                    DependentValueBinding="{Binding Path=Value}">
+                    </dvck:PieSeries>
+                </dvck:Chart.Series>
+            </dvck:Chart>
+
+
         </Grid>
         
         

@@ -116,6 +116,7 @@ namespace CS3750_FinalProject
 
             DataGridCollege.ItemsSource = Colleges;
             LoadLineChartData();
+            LoadPieChartData();
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
         }
@@ -140,6 +141,30 @@ namespace CS3750_FinalProject
             return kvpList;
 
         }
+
+        private List<KeyValuePair<string, int>> LoadPieChartData()
+        {
+            var key = Colleges[0].Departments[0].DepartmentName;
+            var value = Colleges[0].Departments[0].TotalAmountToFix;
+
+            List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>();
+
+
+            for (int i = 0; i < Colleges.Count(); i++)
+            {
+                for (int j = 0; j < Colleges[i].Departments.Count(); j++)
+                {
+                    var keyToAdd = Colleges[i].Departments[j].DepartmentName;
+                    var valueToAdd = Colleges[i].Departments[j].TotalAmountToFix;
+                    kvpList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                }
+            }
+            ((PieSeries)pieChart.Series[0]).ItemsSource = kvpList;
+            return kvpList;
+
+        }
+        
+
 
         private void ExpandRow(object sender, RoutedEventArgs e)
         {
