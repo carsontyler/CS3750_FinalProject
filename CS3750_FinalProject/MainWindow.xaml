@@ -312,14 +312,24 @@
         </Grid>
         <Grid x:Name="SummaryView"
               Grid.Row="1"
-              Visibility="Collapsed">
+              Visibility="Collapsed"
+              FlowDirection="LeftToRight">
             
             <dvck:Chart Name="lineChart"
-                Width="400" Height="250"  
+                Width="800" Height="500"  
                 Background="YellowGreen"  
                 Foreground="DarkBlue"  
                 Title="Area Chart" 
-                LegendTitle="Month Rating"/>
+                LegendTitle="Month Rating" HorizontalAlignment="Left" VerticalAlignment="Top"
+                />
+
+            <dvck:Chart Name="pieChart"
+                Width="800" Height="500"  
+                Background="YellowGreen"  
+                Foreground="DarkBlue"  
+                Title="Pie Chart" 
+                LegendTitle="Department Inversion"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
         </Grid>
         <Grid x:Name="HomeScreen"
