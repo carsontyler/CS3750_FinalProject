@@ -313,15 +313,21 @@
         <Grid x:Name="SummaryView"
               Grid.Row="1"
               Visibility="Collapsed">
-            
+
             <dvck:Chart Name="lineChart"
                 Width="400" Height="250"  
-                Background="YellowGreen"  
-                Foreground="DarkBlue"  
-                Title="Area Chart" 
-                LegendTitle="Month Rating"/>
-
+                Background="LightBlue">
+                <dvck:Chart.Series>
+                    <dvck:LineSeries Title="Amount To Fix"
+                                     IndependentValueBinding="{Binding Path=Key}"
+                                     DependentValueBinding="{Binding Path=Value}">
+                    </dvck:LineSeries>
+                </dvck:Chart.Series>
+            </dvck:Chart>
         </Grid>
+        
+        
+        
         <Grid x:Name="HomeScreen"
               Grid.Row="1">
             <Grid.RowDefinitions>
