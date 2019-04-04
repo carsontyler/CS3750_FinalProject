@@ -24,7 +24,9 @@ namespace CS3750_FinalProject
 
         public List<College> Colleges;
         public DataTable Inversiontable;
-       
+
+        public int totalInversion { get; private set; }
+
         #endregion
 
         #region Constructor
@@ -135,8 +137,17 @@ namespace CS3750_FinalProject
             for (int i = 0; i < Colleges.Count(); i++)
             {
                 var keyToAdd = Colleges[i].CollegeName;
-                var valueToAdd = Colleges[i].FullLessThanAssistantToFix;
+
+                totalInversion += Colleges[i].AssistantLessThanInstructor;
+                totalInversion += Colleges[i].AssociateLessThanAssistant;
+                totalInversion += Colleges[i].AssociateLessThanInstructor;
+                totalInversion += Colleges[i].FullLessThanAssistant;
+                totalInversion += Colleges[i].FullLessThanAssociate;
+                totalInversion += Colleges[i].FullLessThanInstructor;
+
+                var valueToAdd = totalInversion;
                 NumberOfInversions.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                totalInversion = 0;
             }
 
             var dataSourceList = new List<List<KeyValuePair<string, int>>>();
@@ -183,17 +194,17 @@ namespace CS3750_FinalProject
         private void Export(object sender, RoutedEventArgs e)
         {
             IWorkbook workbook = new XSSFWorkbook();
-            
+
             ISheet sheet1 = workbook.CreateSheet("Sheet1");
 
             sheet1.CreateRow(0).CreateCell(0).SetCellValue("This is a Sample");
-            
+
             int x = 1;
-            
+
             for (int i = 1; i <= 15; i++)
             {
                 IRow row = sheet1.CreateRow(i);
-                
+
                 for (int j = 0; j < 15; j++)
                 {
                     row.CreateCell(j).SetCellValue(x++);
