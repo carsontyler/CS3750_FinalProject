@@ -6,6 +6,9 @@
                       xmlns:local="clr-namespace:CS3750_FinalProject"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:dvtk="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+                      xmlns:dvck="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+                      xmlns:dvckp="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
                       mc:Ignorable="d"
                       Title="Inversion Tracker"
                       WindowState="Maximized"
@@ -310,6 +313,14 @@
         <Grid x:Name="SummaryView"
               Grid.Row="1"
               Visibility="Collapsed">
+            
+            <dvck:Chart Name="lineChart"
+                Width="400" Height="250"  
+                Background="YellowGreen"  
+                Foreground="DarkBlue"  
+                Title="Area Chart" 
+                LegendTitle="Month Rating"/>
+
         </Grid>
         <Grid x:Name="HomeScreen"
               Grid.Row="1">
