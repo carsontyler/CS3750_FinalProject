@@ -312,26 +312,22 @@
         </Grid>
         <Grid x:Name="SummaryView"
               Grid.Row="1"
-              Visibility="Collapsed"
-              FlowDirection="LeftToRight">
-            
+              Visibility="Collapsed">
+
             <dvck:Chart Name="lineChart"
-                Width="800" Height="500"  
-                Background="YellowGreen"  
-                Foreground="DarkBlue"  
-                Title="Area Chart" 
-                LegendTitle="Month Rating" HorizontalAlignment="Left" VerticalAlignment="Top"
-                />
-
-            <dvck:Chart Name="pieChart"
-                Width="800" Height="500"  
-                Background="YellowGreen"  
-                Foreground="DarkBlue"  
-                Title="Pie Chart" 
-                LegendTitle="Department Inversion"
-                HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-
+                Width="800" Height="800"  
+                Background="LightBlue">
+                <dvck:Chart.Series>
+                    <dvck:LineSeries Title="Amount To Fix"
+                                     IndependentValueBinding="{Binding Path=Key}"
+                                     DependentValueBinding="{Binding Path=Value}">
+                    </dvck:LineSeries>
+                </dvck:Chart.Series>
+            </dvck:Chart>
         </Grid>
+        
+        
+        
         <Grid x:Name="HomeScreen"
               Grid.Row="1">
             <Grid.RowDefinitions>

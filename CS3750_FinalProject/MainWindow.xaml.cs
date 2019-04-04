@@ -11,6 +11,7 @@ using System.Windows.Media;
 using MahApps.Metro.Controls;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System.Windows.Controls.DataVisualization.Charting;
 
 namespace CS3750_FinalProject
 {
@@ -114,10 +115,32 @@ namespace CS3750_FinalProject
             InversionCalculator.CalcInversion(Colleges);
 
             DataGridCollege.ItemsSource = Colleges;
+            LoadLineChartData();
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
         }
-        
+
+        private List<KeyValuePair<string, int>> LoadLineChartData()
+        {
+            var length = Colleges.Count();
+            var key = Colleges[0].CollegeName;
+            var value = Colleges[0].TotalAmountToFix;
+
+            List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>();
+            
+            for (int i = 0; i < Colleges.Count(); i++)
+            {
+                var keyToAdd = Colleges[i].CollegeName;
+                var valueToAdd = Colleges[i].TotalAmountToFix;
+                kvpList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+
+            }
+
+            ((LineSeries)lineChart.Series[0]).ItemsSource = kvpList;
+            return kvpList;
+
+        }
+
         private void ExpandRow(object sender, RoutedEventArgs e)
         {
             DependencyObject obj = (DependencyObject)e.OriginalSource;
