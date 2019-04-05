@@ -117,23 +117,16 @@ namespace CS3750_FinalProject
             InversionCalculator.CalcInversion(Colleges);
 
             DataGridCollege.ItemsSource = Colleges;
-            LoadLineChartData();
+            LoadLineChartATFData();
+            LoadLineChartNOIData();
             LoadPieChartData();
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
         }
-
-        private void LoadLineChartData()
+        
+        private void LoadLineChartNOIData()
         {
-            List<KeyValuePair<string, int>> AmountToFixList = new List<KeyValuePair<string, int>>();
             List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
-
-            for (int i = 0; i < Colleges.Count(); i++)
-            {
-                var keyToAdd = Colleges[i].CollegeName;
-                var valueToAdd = Colleges[i].TotalAmountToFix;
-                AmountToFixList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
-            }
 
             for (int i = 0; i < Colleges.Count(); i++)
             {
@@ -151,10 +144,24 @@ namespace CS3750_FinalProject
                 totalInversion = 0;
             }
 
-            var dataSourceList = new List<List<KeyValuePair<string, int>>>();
-            dataSourceList.Add(AmountToFixList);
-            dataSourceList.Add(NumberOfInversions);
-            lineChart.DataContext = dataSourceList;
+          ((LineSeries)lineChartNOI.Series[0]).ItemsSource = NumberOfInversions;
+
+        }
+
+        private void LoadLineChartATFData()
+        {
+            List<KeyValuePair<string, int>> AmountToFixList = new List<KeyValuePair<string, int>>();
+
+
+            for (int i = 0; i < Colleges.Count(); i++)
+            {
+                var keyToAdd = Colleges[i].CollegeName;
+                var valueToAdd = Colleges[i].TotalAmountToFix;
+                AmountToFixList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+            }
+
+            ((LineSeries)lineChartATF.Series[0]).ItemsSource = AmountToFixList;
+
         }
 
         private List<KeyValuePair<string, int>> LoadPieChartData()
