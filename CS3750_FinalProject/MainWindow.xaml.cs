@@ -11,6 +11,7 @@ using System.Windows.Media;
 using MahApps.Metro.Controls;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System.Windows.Controls.DataVisualization.Charting;
 
 namespace CS3750_FinalProject
 {
@@ -23,7 +24,9 @@ namespace CS3750_FinalProject
 
         public List<College> Colleges;
         public DataTable Inversiontable;
-       
+
+        public int totalInversion { get; private set; }
+
         #endregion
 
         #region Constructor
@@ -114,10 +117,77 @@ namespace CS3750_FinalProject
             InversionCalculator.CalcInversion(Colleges);
 
             DataGridCollege.ItemsSource = Colleges;
+            LoadLineChartATFData();
+            LoadLineChartNOIData();
+            LoadPieChartData();
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
         }
         
+        private void LoadLineChartNOIData()
+        {
+            List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
+
+            for (int i = 0; i < Colleges.Count(); i++)
+            {
+                var keyToAdd = Colleges[i].CollegeName;
+
+                totalInversion += Colleges[i].AssistantLessThanInstructor;
+                totalInversion += Colleges[i].AssociateLessThanAssistant;
+                totalInversion += Colleges[i].AssociateLessThanInstructor;
+                totalInversion += Colleges[i].FullLessThanAssistant;
+                totalInversion += Colleges[i].FullLessThanAssociate;
+                totalInversion += Colleges[i].FullLessThanInstructor;
+
+                var valueToAdd = totalInversion;
+                NumberOfInversions.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                totalInversion = 0;
+            }
+
+          ((LineSeries)lineChartNOI.Series[0]).ItemsSource = NumberOfInversions;
+
+        }
+
+        private void LoadLineChartATFData()
+        {
+            List<KeyValuePair<string, int>> AmountToFixList = new List<KeyValuePair<string, int>>();
+
+
+            for (int i = 0; i < Colleges.Count(); i++)
+            {
+                var keyToAdd = Colleges[i].CollegeName;
+                var valueToAdd = Colleges[i].TotalAmountToFix;
+                AmountToFixList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+            }
+
+            ((LineSeries)lineChartATF.Series[0]).ItemsSource = AmountToFixList;
+
+        }
+
+        private List<KeyValuePair<string, int>> LoadPieChartData()
+        {
+            var key = Colleges[0].Departments[0].DepartmentName;
+            var value = Colleges[0].Departments[0].TotalAmountToFix;
+
+            List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>();
+
+
+            for (int i = 0; i < Colleges.Count(); i++)
+            {
+                for (int j = 0; j < Colleges[i].Departments.Count(); j++)
+                {
+                    var keyToAdd = Colleges[i].Departments[j].DepartmentName;
+                    var valueToAdd = Colleges[i].Departments[j].TotalAmountToFix;
+                    kvpList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                }
+            }
+            ((PieSeries)pieChart.Series[0]).ItemsSource = kvpList;
+            return kvpList;
+
+        }
+        
+
+
         private void ExpandRow(object sender, RoutedEventArgs e)
         {
             DependencyObject obj = (DependencyObject)e.OriginalSource;
@@ -166,17 +236,17 @@ namespace CS3750_FinalProject
             dlg.ShowDialog();
 
             IWorkbook workbook = new XSSFWorkbook();
-            
+
             ISheet sheet1 = workbook.CreateSheet("Sheet1");
 
             sheet1.CreateRow(0).CreateCell(0).SetCellValue("This is a Sample");
-            
+
             int x = 1;
-            
+
             for (int i = 1; i <= 15; i++)
             {
                 IRow row = sheet1.CreateRow(i);
-                
+
                 for (int j = 0; j < 15; j++)
                 {
                     row.CreateCell(j).SetCellValue(x++);
