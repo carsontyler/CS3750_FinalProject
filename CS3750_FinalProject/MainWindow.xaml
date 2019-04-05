@@ -310,66 +310,49 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <!--<Grid x:Name="SummaryView"
+        <Grid x:Name="SummaryView"
               Grid.Row="1"
               Visibility="Collapsed">
 
-
-                        <dvck:Chart Name="lineChartNOI"
+            <dvck:Chart Name="lineChartNOI"
                         Title="College Overview"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center"
                         Height="400"
                         Width="600"
                         Grid.Column="1">
-                                <dvck:Chart.Series>
-
-                                    <dvck:LineSeries Name="NumberOfInversions" 
+                <dvck:Chart.Series>
+                    <dvck:LineSeries Name="NumberOfInversions" 
                                      Title="Number of Inversions"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
-                                    </dvck:LineSeries>
-                                </dvck:Chart.Series>
-                            </dvck:Chart>
+                    </dvck:LineSeries>
+                </dvck:Chart.Series>
+            </dvck:Chart>
 
 
-                            <dvck:Chart Name="lineChartATF"
+            <dvck:Chart Name="lineChartATF"
                         Title="College Overview"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                         Height="400"
                         Width="600"
                         Grid.Column="1">
-                                <dvck:Chart.Series>
-
-                </dvck:Chart.Series>
-            </dvck:Chart>
-            
-            <dvck:Chart Name="pieChart"
-                Title="Department Summary"
-                Width="800" Height="800"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom" Margin="0,0,0,50"
-                ToolTipService.ToolTip="{Binding Path=key}"
-                >
                 <dvck:Chart.Series>
-                    <dvck:PieSeries Title="Amount by Department" 
-                                    <dvck:LineSeries Name="AmountToFix" 
+                    <dvck:LineSeries Name="AmountToFix" 
                                      Title="Amount To Fix"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
-                                    </dvck:LineSeries>
-                                </dvck:Chart.Series>
-                            </dvck:Chart>
+                    </dvck:LineSeries>
+                </dvck:Chart.Series>
+            </dvck:Chart>
 
-
-
-                    <dvck:Chart Name="pieChart"
+            <dvck:Chart Name="pieChart"
                 Width="600" Height="400"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left">
-                        <dvck:Chart.Series>
-                            <dvck:PieSeries Title="Visualization" 
+                <dvck:Chart.Series>
+                    <dvck:PieSeries Title="Visualization" 
                                     IndependentValueBinding="{Binding Path=Key}" 
                                     DependentValueBinding="{Binding Path=Value}"
                                     AnimationSequence="FirstToLast">
@@ -379,10 +362,10 @@
 
 
 
-        </Grid>-->
-        
-        
-        
+        </Grid>
+
+
+
         <Grid x:Name="HomeScreen"
               Grid.Row="1">
             <Grid.RowDefinitions>
