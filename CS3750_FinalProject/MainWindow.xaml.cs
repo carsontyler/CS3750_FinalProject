@@ -117,14 +117,14 @@ namespace CS3750_FinalProject
             InversionCalculator.CalcInversion(Colleges);
 
             DataGridCollege.ItemsSource = Colleges;
-            LoadLineChartATFData();
-            LoadLineChartNOIData();
-            LoadPieChartData();
+            //LoadLineChartATFData();
+            //LoadLineChartNOIData();
+            //LoadPieChartData();
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
         }
         
-        private void LoadLineChartNOIData()
+        /* private void LoadLineChartNOIData()
         {
             List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
 
@@ -185,7 +185,7 @@ namespace CS3750_FinalProject
             return kvpList;
 
         }
-        
+        */
 
 
         private void ExpandRow(object sender, RoutedEventArgs e)
@@ -228,30 +228,45 @@ namespace CS3750_FinalProject
 
             var dlg = new SaveFileDialog
             {
-                FileName = "Document", // Default file name
-                DefaultExt = ".xls", // Default file extension
-                Filter = "Spreadsheet (.xls)|*.xls" // Filter files by extension
+                FileName = "InversionExport", // Default file name
+                DefaultExt = ".xlsx", // Default file extension
+                Filter = "Spreadsheet (.xlsx)|*.xlsx" // Filter files by extension
             };
 
-            dlg.ShowDialog();
+            //dlg.ShowDialog();
 
             IWorkbook workbook = new XSSFWorkbook();
 
-            ISheet sheet1 = workbook.CreateSheet("Sheet1");
+            ISheet sheet1 = workbook.CreateSheet("InversionsByCollege");
 
-            sheet1.CreateRow(0).CreateCell(0).SetCellValue("This is a Sample");
 
-            int x = 1;
+            var x = 1;
 
-            for (int i = 1; i <= 15; i++)
+            foreach (var college in Colleges)
+            {
+                var row = sheet1.CreateRow(x++);
+
+                row.CreateCell(0).SetCellValue(college.CollegeName);
+                row.CreateCell(1).SetCellValue(college.TotalAmountToFix);
+                row.CreateCell(2).SetCellValue(college.AssistantLessThanInstructor);
+                row.CreateCell(3).SetCellValue(college.AssociateLessThanInstructor);
+                row.CreateCell(4).SetCellValue(college.AssociateLessThanAssistant);
+                row.CreateCell(5).SetCellValue(college.FullLessThanInstructor);
+                row.CreateCell(6).SetCellValue(college.FullLessThanAssistant);
+                row.CreateCell(7).SetCellValue(college.FullLessThanAssociate);
+            }
+
+            /*for (int i = 0; i <= Colleges.Count; i++)
             {
                 IRow row = sheet1.CreateRow(i);
+
+                row.CreateCell(i).SetCellValue(x++);
 
                 for (int j = 0; j < 15; j++)
                 {
                     row.CreateCell(j).SetCellValue(x++);
                 }
-            }
+            }*/
 
             FileStream sw = File.Create("test.xls");
 
@@ -270,7 +285,7 @@ namespace CS3750_FinalProject
             SummaryButton.Foreground = new SolidColorBrush(Colors.Black);
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
-            SummaryView.Visibility = Visibility.Collapsed;
+            //SummaryView.Visibility = Visibility.Collapsed;
         }
 
         private void ShowSummary(object sender, RoutedEventArgs e)
@@ -282,7 +297,7 @@ namespace CS3750_FinalProject
             DataGridButton.Foreground = new SolidColorBrush(Colors.Black);
             SummaryButton.Foreground = new SolidColorBrush(Colors.White);
             HomeScreen.Visibility = Visibility.Hidden;
-            SummaryView.Visibility = Visibility.Visible;
+            //SummaryView.Visibility = Visibility.Visible;
             InversionDataView.Visibility = Visibility.Collapsed;
         }
 

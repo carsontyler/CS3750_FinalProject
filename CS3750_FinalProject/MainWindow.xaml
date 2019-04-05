@@ -310,7 +310,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Grid x:Name="SummaryView"
+        <!--<Grid x:Name="SummaryView"
               Grid.Row="1"
               Visibility="Collapsed">
 
@@ -379,7 +379,7 @@
 
 
 
-        </Grid>
+        </Grid>-->
         
         
         
