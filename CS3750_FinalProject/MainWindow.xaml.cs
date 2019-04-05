@@ -155,6 +155,16 @@ namespace CS3750_FinalProject
 
         private void Export(object sender, RoutedEventArgs e)
         {
+
+            var dlg = new SaveFileDialog
+            {
+                FileName = "Document", // Default file name
+                DefaultExt = ".xls", // Default file extension
+                Filter = "Spreadsheet (.xls)|*.xls" // Filter files by extension
+            };
+
+            dlg.ShowDialog();
+
             IWorkbook workbook = new XSSFWorkbook();
             
             ISheet sheet1 = workbook.CreateSheet("Sheet1");
@@ -177,7 +187,7 @@ namespace CS3750_FinalProject
 
             workbook.Write(sw);
 
-            File.Open("test.xlsx", FileMode.Open);
+            sw.Close();
         }
 
         private void ShowDataGrid(object sender, RoutedEventArgs e)
