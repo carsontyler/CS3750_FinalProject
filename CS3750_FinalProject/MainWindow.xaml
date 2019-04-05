@@ -338,12 +338,17 @@
             </dvck:Chart>
             
             <dvck:Chart Name="pieChart"
+                Title="Department Summary"
                 Width="800" Height="800"
-                HorizontalAlignment="Right">
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom" Margin="0,0,0,50"
+                ToolTipService.ToolTip="{Binding Path=key}"
+                >
                 <dvck:Chart.Series>
-                    <dvck:PieSeries Title="Visualization" 
+                    <dvck:PieSeries Title="Amount by Department" 
                                     IndependentValueBinding="{Binding Path=Key}" 
-                                    DependentValueBinding="{Binding Path=Value}">
+                                    DependentValueBinding="{Binding Path=Value}"
+                                    AnimationSequence="FirstToLast">
                     </dvck:PieSeries>
                 </dvck:Chart.Series>
             </dvck:Chart>
