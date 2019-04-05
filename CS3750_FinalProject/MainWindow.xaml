@@ -347,6 +347,8 @@
                 </dvck:Chart.Series>
             </dvck:Chart>
 
+
+
             <dvck:Chart Name="pieChart"
                 Width="600" Height="400"
                 VerticalAlignment="Top"

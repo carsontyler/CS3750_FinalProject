@@ -117,14 +117,14 @@ namespace CS3750_FinalProject
             InversionCalculator.CalcInversion(Colleges);
 
             DataGridCollege.ItemsSource = Colleges;
-            //LoadLineChartATFData();
-            //LoadLineChartNOIData();
-            //LoadPieChartData();
+            LoadLineChartATFData();
+            LoadLineChartNOIData();
+            LoadPieChartData();
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
         }
         
-        /* private void LoadLineChartNOIData()
+         private void LoadLineChartNOIData()
         {
             List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
 
@@ -185,7 +185,6 @@ namespace CS3750_FinalProject
             return kvpList;
 
         }
-        */
 
 
         private void ExpandRow(object sender, RoutedEventArgs e)
@@ -291,7 +290,7 @@ namespace CS3750_FinalProject
             SummaryButton.Foreground = new SolidColorBrush(Colors.Black);
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
-            //SummaryView.Visibility = Visibility.Collapsed;
+            SummaryView.Visibility = Visibility.Collapsed;
         }
 
         private void ShowSummary(object sender, RoutedEventArgs e)
@@ -303,7 +302,7 @@ namespace CS3750_FinalProject
             DataGridButton.Foreground = new SolidColorBrush(Colors.Black);
             SummaryButton.Foreground = new SolidColorBrush(Colors.White);
             HomeScreen.Visibility = Visibility.Hidden;
-            //SummaryView.Visibility = Visibility.Visible;
+            SummaryView.Visibility = Visibility.Visible;
             InversionDataView.Visibility = Visibility.Collapsed;
         }
 
