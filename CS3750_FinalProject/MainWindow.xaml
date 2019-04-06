@@ -153,10 +153,9 @@
                     Padding="10"
                     Margin="0,0,0,0"
                     Width="Auto"
-                    FontSize="16"
+                    FontSize="15"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
-                    Foreground="#492365"
                     Style="{DynamicResource SquareButtonStyle}"
                     Click="ShowDataGrid">Data Grid</Button>
             <Button x:Name="SummaryButton"
@@ -165,10 +164,9 @@
                     Padding="10"
                     Margin="0,0,0,0"
                     Width="Auto"
-                    FontSize="16"
+                    FontSize="15"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
-                    Foreground="#492365"
                     Style="{DynamicResource SquareButtonStyle}"
                     Click="ShowSummary">Summary</Button>
         </Grid>
