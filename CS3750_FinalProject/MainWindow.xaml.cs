@@ -6,12 +6,14 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Data;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Media;
 using MahApps.Metro.Controls;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Windows.Controls.DataVisualization.Charting;
+using NPOI.SS.Formula.Functions;
 
 namespace CS3750_FinalProject
 {
@@ -232,25 +234,27 @@ namespace CS3750_FinalProject
                 Filter = "Spreadsheet (.xlsx)|*.xlsx" // Filter files by extension
             };
 
-            //dlg.ShowDialog();
+            dlg.ShowDialog();
 
             IWorkbook workbook = new XSSFWorkbook();
 
+            /*COLLEGE SHEET*/
             ISheet sheet1 = workbook.CreateSheet("InversionsByCollege");
 
-            /*sheet1.CreateRow(0).CreateCell(0).SetCellValue("Colleges");
-            sheet1.CreateRow(0).CreateCell(1).SetCellValue("TotalAmtToFix");
-            sheet1.CreateRow(0).CreateCell(2).SetCellValue("Asst<Instr");
-            sheet1.CreateRow(0).CreateCell(3).SetCellValue("Assoc<Instr");
-            sheet1.CreateRow(0).CreateCell(0).SetCellValue("Colleges");*/
-
+            IRow row0 = sheet1.CreateRow(0);
+            row0.CreateCell(0).SetCellValue("College");
+            row0.CreateCell(1).SetCellValue("Total Amount To Fix");
+            row0.CreateCell(2).SetCellValue("Assistant < Instructor");
+            row0.CreateCell(3).SetCellValue("Associate < Instructor");
+            row0.CreateCell(4).SetCellValue("Associate < Assistant");
+            row0.CreateCell(5).SetCellValue("Full < Instructor");
+            row0.CreateCell(6).SetCellValue("Full < Assistant");
+            row0.CreateCell(7).SetCellValue("Full < Associate");
 
             var x = 1;
-
             foreach (var college in Colleges)
             {
                 var row = sheet1.CreateRow(x++);
-
                 row.CreateCell(0).SetCellValue(college.CollegeName);
                 row.CreateCell(1).SetCellValue(college.TotalAmountToFix);
                 row.CreateCell(2).SetCellValue(college.AssistantLessThanInstructor);
@@ -260,20 +264,38 @@ namespace CS3750_FinalProject
                 row.CreateCell(6).SetCellValue(college.FullLessThanAssistant);
                 row.CreateCell(7).SetCellValue(college.FullLessThanAssociate);
             }
+            /*END COLLEGE SHEET, START DEPT SHEET*/
+            ISheet sheet2 = workbook.CreateSheet("InversionsByDepartment");
 
-            /*for (int i = 0; i <= Colleges.Count; i++)
+            IRow row1 = sheet2.CreateRow(0);
+            row1.CreateCell(0).SetCellValue("Department");
+            row1.CreateCell(1).SetCellValue("Total Amount To Fix");
+            row1.CreateCell(2).SetCellValue("Assistant < Instructor");
+            row1.CreateCell(3).SetCellValue("Associate < Instructor");
+            row1.CreateCell(4).SetCellValue("Associate < Assistant");
+            row1.CreateCell(5).SetCellValue("Full < Instructor");
+            row1.CreateCell(6).SetCellValue("Full < Assistant");
+            row1.CreateCell(7).SetCellValue("Full < Associate");
+
+            var y = 1;
+            foreach (var college in Colleges)
             {
-                IRow row = sheet1.CreateRow(i);
-
-                row.CreateCell(i).SetCellValue(x++);
-
-                for (int j = 0; j < 15; j++)
+                foreach (var dept in college.Departments)
                 {
-                    row.CreateCell(j).SetCellValue(x++);
+                    var row = sheet2.CreateRow(y++);
+                    row.CreateCell(0).SetCellValue(dept.DepartmentName);
+                    row.CreateCell(1).SetCellValue(dept.TotalAmountToFix);
+                    row.CreateCell(2).SetCellValue(dept.AssistantLessThanInstructor);
+                    row.CreateCell(3).SetCellValue(dept.AssociateLessThanInstructor);
+                    row.CreateCell(4).SetCellValue(dept.AssociateLessThanAssistant);
+                    row.CreateCell(5).SetCellValue(dept.FullLessThanInstructor);
+                    row.CreateCell(6).SetCellValue(dept.FullLessThanAssistant);
+                    row.CreateCell(7).SetCellValue(dept.FullLessThanAssociate);
                 }
-            }*/
+            }
+            /*END DEPT SHEET*/
 
-            FileStream sw = File.Create("test.xls");
+            FileStream sw = File.Create(dlg.FileName);
 
             workbook.Write(sw);
 
