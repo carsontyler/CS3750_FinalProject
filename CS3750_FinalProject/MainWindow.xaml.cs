@@ -1,19 +1,15 @@
-﻿using System;
-using Microsoft.VisualBasic.FileIO;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Forms;
-using System.Linq;
-using System.Data;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows.Media;
-using MahApps.Metro.Controls;
+﻿using Microsoft.VisualBasic.FileIO;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.DataVisualization.Charting;
-using NPOI.SS.Formula.Functions;
+using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace CS3750_FinalProject
 {
@@ -25,9 +21,9 @@ namespace CS3750_FinalProject
         #region Fields
 
         public List<College> Colleges;
-        public DataTable Inversiontable;
+        public DataTable InversionTable;
 
-        public int totalInversion { get; private set; }
+        public int TotalInversion { get; private set; }
 
         #endregion
 
@@ -40,6 +36,7 @@ namespace CS3750_FinalProject
             if (!string.IsNullOrEmpty(fileName))
                 ParseFile(fileName);
         }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -67,6 +64,13 @@ namespace CS3750_FinalProject
 
             if (filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                if (DataGridCollege.HasItems)
+                {
+                    var result = System.Windows.MessageBox.Show("Would you like to overwrite the data?", "Overwrite Data", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                        return;
+                    ClearData();
+                }
                 string file = filedialog.FileName;
                 ParseFile(file);
             }
@@ -107,10 +111,8 @@ namespace CS3750_FinalProject
                 if (!Colleges.Any(a => a.CollegeName == fields[headers.IndexOf("CLG")]))
                     Colleges.Add(new College(fields[headers.IndexOf("CLG")]));
 
-                if (!Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
-                        Departments.Any(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]))
-                    Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
-                        Departments.Add(new Department(fields[headers.IndexOf("DEPT.")]));
+                if (!Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).Departments.Any(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]))
+                    Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).Departments.Add(new Department(fields[headers.IndexOf("DEPT.")]));
 
                 Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
                     Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
@@ -122,11 +124,12 @@ namespace CS3750_FinalProject
             LoadLineChartATFData();
             LoadLineChartNOIData();
             LoadPieChartData();
-            HomeScreen.Visibility = Visibility.Hidden;
+            //HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
+            SummaryView.Visibility = Visibility.Collapsed;
         }
-        
-         private void LoadLineChartNOIData()
+
+        private void LoadLineChartNOIData()
         {
             List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
 
@@ -134,16 +137,16 @@ namespace CS3750_FinalProject
             {
                 var keyToAdd = Colleges[i].CollegeName;
 
-                totalInversion += Colleges[i].AssistantLessThanInstructor;
-                totalInversion += Colleges[i].AssociateLessThanAssistant;
-                totalInversion += Colleges[i].AssociateLessThanInstructor;
-                totalInversion += Colleges[i].FullLessThanAssistant;
-                totalInversion += Colleges[i].FullLessThanAssociate;
-                totalInversion += Colleges[i].FullLessThanInstructor;
+                TotalInversion += Colleges[i].AssistantLessThanInstructor;
+                TotalInversion += Colleges[i].AssociateLessThanAssistant;
+                TotalInversion += Colleges[i].AssociateLessThanInstructor;
+                TotalInversion += Colleges[i].FullLessThanAssistant;
+                TotalInversion += Colleges[i].FullLessThanAssociate;
+                TotalInversion += Colleges[i].FullLessThanInstructor;
 
-                var valueToAdd = totalInversion;
+                var valueToAdd = TotalInversion;
                 NumberOfInversions.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
-                totalInversion = 0;
+                TotalInversion = 0;
             }
 
           ((LineSeries)lineChartNOI.Series[0]).ItemsSource = NumberOfInversions;
@@ -168,26 +171,26 @@ namespace CS3750_FinalProject
 
         private List<KeyValuePair<string, int>> LoadPieChartData()
         {
-            var key = Colleges[0].Departments[0].DepartmentName;
-            var value = Colleges[0].Departments[0].TotalAmountToFix;
-
             List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>();
 
-
-            for (int i = 0; i < Colleges.Count(); i++)
+            if (Colleges.Any())
             {
-                for (int j = 0; j < Colleges[i].Departments.Count(); j++)
+                var key = Colleges[0].Departments[0].DepartmentName;
+                var value = Colleges[0].Departments[0].TotalAmountToFix;
+
+                for (int i = 0; i < Colleges.Count(); i++)
                 {
-                    var keyToAdd = Colleges[i].Departments[j].DepartmentName;
-                    var valueToAdd = Colleges[i].Departments[j].TotalAmountToFix;
-                    kvpList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                    for (int j = 0; j < Colleges[i].Departments.Count(); j++)
+                    {
+                        var keyToAdd = Colleges[i].Departments[j].DepartmentName;
+                        var valueToAdd = Colleges[i].Departments[j].TotalAmountToFix;
+                        kvpList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                    }
                 }
             }
             ((PieSeries)pieChart.Series[0]).ItemsSource = kvpList;
             return kvpList;
-
         }
-
 
         private void ExpandRow(object sender, RoutedEventArgs e)
         {
@@ -219,6 +222,7 @@ namespace CS3750_FinalProject
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
         }
+
         private void HandleMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             MainScroller.ScrollToVerticalOffset(MainScroller.VerticalOffset - e.Delta);
@@ -310,7 +314,7 @@ namespace CS3750_FinalProject
             DataGridButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
             DataGridButton.Foreground = new SolidColorBrush(Colors.White);
             SummaryButton.Foreground = new SolidColorBrush(Colors.Black);
-            HomeScreen.Visibility = Visibility.Hidden;
+            //HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
             SummaryView.Visibility = Visibility.Collapsed;
         }
@@ -323,7 +327,7 @@ namespace CS3750_FinalProject
             SummaryButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
             DataGridButton.Foreground = new SolidColorBrush(Colors.Black);
             SummaryButton.Foreground = new SolidColorBrush(Colors.White);
-            HomeScreen.Visibility = Visibility.Hidden;
+            //HomeScreen.Visibility = Visibility.Hidden;
             SummaryView.Visibility = Visibility.Visible;
             InversionDataView.Visibility = Visibility.Collapsed;
         }
@@ -332,8 +336,29 @@ namespace CS3750_FinalProject
         {
             this.Close();
         }
+
+        private void ClearData_Click(object sender, RoutedEventArgs e)
+        {
+            var result = System.Windows.MessageBox.Show("Would you like to clear the data?", "Clear Data", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No)
+                return;
+            ClearData();
+        }
+
+        private void ClearData()
+        {
+            Colleges = new List<College>();
+            InversionTable = new DataTable();
+            //DataGridCollege.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Collapsed;
+            //DataGridCollege.Columns.Clear();
+            //DataGridCollege.Items.Clear();
+            //DataGridCollege.UpdateLayout();
+            //DataGridCollege.Items.Refresh();
+            LoadLineChartATFData();
+            LoadLineChartNOIData();
+            LoadPieChartData();
+        }
+
         #endregion
-
     }
-
 }
