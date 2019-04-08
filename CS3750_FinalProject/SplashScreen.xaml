@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CS3750_FinalProject"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="Inversion Tracker"
+        Title="SplashScreen"
         WindowStartupLocation="CenterScreen"
         Height="270"
         Width="480"

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CS3750_FinalProject
 {
@@ -11,43 +15,32 @@ namespace CS3750_FinalProject
 
         #endregion
 
-        #region Constructors
-
         public InvertedEmployee(Employee e, Employee i)
         {
-            Inverted = new Employee
-            {
-                College = e.College,
-                Department = e.Department,
-                Name = e.Name,
-                Rank = e.Rank,
-                SalaryAmount = e.SalaryAmount
-            };
-            Inverters = new List<Employee> { i };
+            Inverted = new Employee();
+            Inverted.College = e.College;
+            Inverted.Department = e.Department;
+            Inverted.Name = e.Name;
+            Inverted.Rank = e.Rank;
+            Inverted.SalaryAmount = e.SalaryAmount;
+            Inverters = new List<Employee>();
+            Inverters.Add(i);
         }
 
         public InvertedEmployee(Employee e)
         {
-            Inverted = new Employee
-            {
-                College = e.College,
-                Department = e.Department,
-                Name = e.Name,
-                Rank = e.Rank,
-                SalaryAmount = e.SalaryAmount
-            };
+            Inverted = new Employee();
+            Inverted.College = e.College;
+            Inverted.Department = e.Department;
+            Inverted.Name = e.Name;
+            Inverted.Rank = e.Rank;
+            Inverted.SalaryAmount = e.SalaryAmount;
             Inverters = new List<Employee>();
         }
-
-        #endregion
-
-        #region Public Methods
 
         public void AddInverter(Employee e)
         {
             Inverters.Add(e);
         }
-
-        #endregion
     }
 }
