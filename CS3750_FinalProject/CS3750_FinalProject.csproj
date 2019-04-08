@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>WLogo2.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
@@ -192,10 +195,17 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\WLogo2.png" />
+    <Resource Include="WLogo2.ico" />
+    <Resource Include="WLogo.ico" />
+    <Resource Include="WLogo_Money.ico" />
     <Resource Include="Images\WeberCampus.png" />
     <Resource Include="Images\WLogo.png" />
     <Resource Include="Images\WLogoFull.png" />
     <Content Include="Images\WeberStatue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="System\Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
