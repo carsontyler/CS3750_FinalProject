@@ -22,14 +22,14 @@ namespace CS3750_FinalProject
                             continue;
 
                         var moneyToFix = 0;
-                        var profInstr = false;
-                        var profAsst = false;
-                        var profAsso = false;
-                        var assoInstr = false;
-                        var assoAsst = false;
-                        var asstInstr = false;
+                        var ProfInstr = false;
+                        var ProfAsst = false;
+                        var ProfAsso = false;
+                        var AssoInstr = false;
+                        var AssoAsst = false;
+                        var AsstInstr = false;
                         var invertedYet = false;
-                        InvertedEmployee newIe = new InvertedEmployee(inverted);
+                        InvertedEmployee newIE = new InvertedEmployee(inverted);
 
                         foreach (var inverter in department.Employees) //loop through and compare inverted to inverter
                         {
@@ -51,84 +51,82 @@ namespace CS3750_FinalProject
                                 continue;
                             if (!invertedYet) 
                             {
-                                newIe.AddInverter(inverter);
+                                newIE.AddInverter(inverter);
                                 invertedYet = true;
                             }
                             else
-                                newIe.AddInverter(inverter);
+                                newIE.AddInverter(inverter);
                             switch (inverted.Rank) //compare ranks
                             {
                                 case "Prof" when inverter.Rank == "Asso":
-                                    profAsso = true;
+                                    ProfAsso = true;
                                     break;
                                 case "Prof" when inverter.Rank == "Asst":
-                                    profAsst = true;
+                                    ProfAsst = true;
                                     break;
                                 case "Prof" when inverter.Rank == "Instr":
-                                    profInstr = true;
+                                    ProfInstr = true;
                                     break;
                                 case "Asso" when inverter.Rank == "Asst":
-                                    assoAsst = true;
+                                    AssoAsst = true;
                                     break;
                                 case "Asso" when inverter.Rank == "Instr":
-                                    assoInstr = true;
+                                    AssoInstr = true;
                                     break;
                                 case "Asst" when inverter.Rank == "Instr":
-                                    asstInstr = true;
+                                    AsstInstr = true;
                                     break;
                             }
                         }
-
-                        if (profInstr)
+                        if (ProfInstr)
                         {
                             department.FullLessThanInstructor++;
                             department.FullLessThanInstructorToFix += moneyToFix;
-                            newIe.FullLessThanInstructor++;
-                            newIe.FullLessThanInstructorToFix += moneyToFix;
+                            newIE.FullLessThanInstructor++;
+                            newIE.FullLessThanInstructorToFix += moneyToFix;
                         }
-                        else if (profAsst)
+                        else if (ProfAsst)
                         {
                             department.FullLessThanAssistant++;
                             department.FullLessThanAssistantToFix += moneyToFix;
-                            newIe.FullLessThanAssistant++;
-                            newIe.FullLessThanAssistantToFix += moneyToFix;
+                            newIE.FullLessThanAssistant++;
+                            newIE.FullLessThanAssistantToFix += moneyToFix;
                         }
-                        else if (profAsso)
+                        else if (ProfAsso)
                         {
                             department.FullLessThanAssociate++;
                             department.FullLessThanAssociateToFix += moneyToFix;
-                            newIe.FullLessThanAssociate++;
-                            newIe.FullLessThanAssociateToFix += moneyToFix;
+                            newIE.FullLessThanAssociate++;
+                            newIE.FullLessThanAssociateToFix += moneyToFix;
                         }
-                        else if (assoInstr)
+                        else if (AssoInstr)
                         {
                             department.AssociateLessThanInstructor++;
                             department.AssociateLessThanInstructorToFix += moneyToFix;
-                            newIe.AssociateLessThanInstructor++;
-                            newIe.AssociateLessThanInstructorToFix += moneyToFix;
+                            newIE.AssociateLessThanInstructor++;
+                            newIE.AssociateLessThanInstructorToFix += moneyToFix;
                         }
-                        else if (assoAsst)
+                        else if (AssoAsst)
                         {
                             department.AssociateLessThanAssistant++;
                             department.AssociateLessThanAssistantToFix += moneyToFix;
-                            newIe.AssociateLessThanAssistant++;
-                            newIe.AssociateLessThanAssistantToFix += moneyToFix;
+                            newIE.AssociateLessThanAssistant++;
+                            newIE.AssociateLessThanAssistantToFix += moneyToFix;
                         }
-                        else if (asstInstr) {
+                        else if (AsstInstr) {
                             department.AssistantLessThanInstructor++;
                             department.AssistantLessThanInstructorToFix += moneyToFix;
-                            newIe.AssistantLessThanInstructor++;
-                            newIe.AssistantLessThanInstructorToFix += moneyToFix;
+                            newIE.AssistantLessThanInstructor++;
+                            newIE.AssistantLessThanInstructorToFix += moneyToFix;
                         }
                        
                         if (invertedYet)
                         {
                             department.TotalAmountToFix += moneyToFix;
-                            newIe.TotalAmountToFix += moneyToFix;
-                            department.InvertedEmployees.Add(newIe);
+                            newIE.TotalAmountToFix += moneyToFix;
+                            department.InvertedEmployees.Add(newIE);
                         }
                     }
-
                     //Update College values
                     college.TotalAmountToFix += department.TotalAmountToFix;
                     college.AssistantLessThanInstructor += department.AssistantLessThanInstructor;
