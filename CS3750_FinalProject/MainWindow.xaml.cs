@@ -25,9 +25,8 @@ namespace CS3750_FinalProject
         #region Fields
 
         public List<College> Colleges;
-        public DataTable Inversiontable;
 
-        public int totalInversion { get; private set; }
+        public int TotalInversion { get; private set; }
 
         #endregion
 
@@ -67,20 +66,20 @@ namespace CS3750_FinalProject
 
             if (filedialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string file = filedialog.FileName;
+                var file = filedialog.FileName;
                 ParseFile(file);
             }
         }
 
         private void ParseFile(string file)
         {
-            BrushConverter brush = new BrushConverter();
+            var brush = new BrushConverter();
             DataGridButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
             DataGridButton.Foreground = new SolidColorBrush(Colors.White);
-            TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
+            var parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
             parser.SetDelimiters(",");
 
-            List<string> headers = new List<string>();
+            var headers = new List<string>();
 
             while (!parser.EndOfData)
             {
@@ -90,8 +89,7 @@ namespace CS3750_FinalProject
 
                 if (fields[0] == "CLG" || fields[0] == "ID")
                 {
-                    foreach (var field in fields)
-                        headers.Add(field);
+                    headers.AddRange(fields);
                     continue;
                 }
 
@@ -114,55 +112,58 @@ namespace CS3750_FinalProject
 
                 Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
                     Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
+
+                Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
+                    Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).OrderEmployees();
             }
 
             InversionCalculator.CalcInversion(Colleges);
 
             DataGridCollege.ItemsSource = Colleges;
-            LoadLineChartATFData();
-            LoadLineChartNOIData();
+            LoadLineChartAtfData();
+            LoadLineChartNoiData();
             LoadPieChartData();
             HomeScreen.Visibility = Visibility.Hidden;
             InversionDataView.Visibility = Visibility.Visible;
         }
         
-         private void LoadLineChartNOIData()
+         private void LoadLineChartNoiData()
         {
-            List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
+            var numberOfInversions = new List<KeyValuePair<string, int>>();
 
-            for (int i = 0; i < Colleges.Count(); i++)
+            for (var i = 0; i < Colleges.Count(); i++)
             {
                 var keyToAdd = Colleges[i].CollegeName;
 
-                totalInversion += Colleges[i].AssistantLessThanInstructor;
-                totalInversion += Colleges[i].AssociateLessThanAssistant;
-                totalInversion += Colleges[i].AssociateLessThanInstructor;
-                totalInversion += Colleges[i].FullLessThanAssistant;
-                totalInversion += Colleges[i].FullLessThanAssociate;
-                totalInversion += Colleges[i].FullLessThanInstructor;
+                TotalInversion += Colleges[i].AssistantLessThanInstructor;
+                TotalInversion += Colleges[i].AssociateLessThanAssistant;
+                TotalInversion += Colleges[i].AssociateLessThanInstructor;
+                TotalInversion += Colleges[i].FullLessThanAssistant;
+                TotalInversion += Colleges[i].FullLessThanAssociate;
+                TotalInversion += Colleges[i].FullLessThanInstructor;
 
-                var valueToAdd = totalInversion;
-                NumberOfInversions.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
-                totalInversion = 0;
+                var valueToAdd = TotalInversion;
+                numberOfInversions.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                TotalInversion = 0;
             }
 
-          ((LineSeries)lineChartNOI.Series[0]).ItemsSource = NumberOfInversions;
+          ((LineSeries)lineChartNOI.Series[0]).ItemsSource = numberOfInversions;
 
         }
 
-        private void LoadLineChartATFData()
+        private void LoadLineChartAtfData()
         {
-            List<KeyValuePair<string, int>> AmountToFixList = new List<KeyValuePair<string, int>>();
+            var amountToFixList = new List<KeyValuePair<string, int>>();
 
 
-            for (int i = 0; i < Colleges.Count(); i++)
+            for (var i = 0; i < Colleges.Count(); i++)
             {
                 var keyToAdd = Colleges[i].CollegeName;
                 var valueToAdd = Colleges[i].TotalAmountToFix;
-                AmountToFixList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
+                amountToFixList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
             }
 
-            ((LineSeries)lineChartATF.Series[0]).ItemsSource = AmountToFixList;
+            ((LineSeries)lineChartATF.Series[0]).ItemsSource = amountToFixList;
 
         }
 
@@ -171,12 +172,12 @@ namespace CS3750_FinalProject
             var key = Colleges[0].Departments[0].DepartmentName;
             var value = Colleges[0].Departments[0].TotalAmountToFix;
 
-            List<KeyValuePair<string, int>> kvpList = new List<KeyValuePair<string, int>>();
+            var kvpList = new List<KeyValuePair<string, int>>();
 
 
-            for (int i = 0; i < Colleges.Count(); i++)
+            for (var i = 0; i < Colleges.Count(); i++)
             {
-                for (int j = 0; j < Colleges[i].Departments.Count(); j++)
+                for (var j = 0; j < Colleges[i].Departments.Count(); j++)
                 {
                     var keyToAdd = Colleges[i].Departments[j].DepartmentName;
                     var valueToAdd = Colleges[i].Departments[j].TotalAmountToFix;
@@ -188,10 +189,9 @@ namespace CS3750_FinalProject
 
         }
 
-
         private void ExpandRow(object sender, RoutedEventArgs e)
         {
-            DependencyObject obj = (DependencyObject)e.OriginalSource;
+            var obj = (DependencyObject)e.OriginalSource;
             while (!(obj is DataGridRow) && obj != null) obj = VisualTreeHelper.GetParent(obj);
 
             if (obj is DataGridRow)
@@ -199,14 +199,14 @@ namespace CS3750_FinalProject
                 if ((obj as DataGridRow).DetailsVisibility == Visibility.Visible)
                 {
                     (obj as DataGridRow).DetailsVisibility = Visibility.Collapsed;
-                    System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
+                    var btn = new System.Windows.Controls.Button();
                     btn = sender as System.Windows.Controls.Button;
                     btn.Content = "+";
                 }
                 else
                 {
                     (obj as DataGridRow).DetailsVisibility = Visibility.Visible;
-                    System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
+                    var btn = new System.Windows.Controls.Button();
                     btn = sender as System.Windows.Controls.Button;
                     btn.Content = "-";
                 }
@@ -215,10 +215,11 @@ namespace CS3750_FinalProject
 
         private void ListViewScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            ScrollViewer scv = (ScrollViewer)sender;
+            var scv = (ScrollViewer)sender;
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
         }
+
         private void HandleMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             MainScroller.ScrollToVerticalOffset(MainScroller.VerticalOffset - e.Delta);
@@ -226,7 +227,6 @@ namespace CS3750_FinalProject
 
         private void Export(object sender, RoutedEventArgs e)
         {
-
             var dlg = new SaveFileDialog
             {
                 FileName = "InversionExport", // Default file name
@@ -239,8 +239,9 @@ namespace CS3750_FinalProject
             IWorkbook workbook = new XSSFWorkbook();
 
             /*COLLEGE SHEET*/
-            ISheet sheet1 = workbook.CreateSheet("InversionsByCollege");
+            ISheet sheet1 = workbook.CreateSheet("InversionsByCollege"); //sheet 1
 
+            //setup header row
             IRow row0 = sheet1.CreateRow(0);
             row0.CreateCell(0).SetCellValue("College");
             row0.CreateCell(1).SetCellValue("Total Amount To Fix");
@@ -252,7 +253,7 @@ namespace CS3750_FinalProject
             row0.CreateCell(7).SetCellValue("Full < Associate");
 
             var x = 1;
-            foreach (var college in Colleges)
+            foreach (var college in Colleges) //loop colleges and insert data
             {
                 var row = sheet1.CreateRow(x++);
                 row.CreateCell(0).SetCellValue(college.CollegeName);
@@ -265,8 +266,9 @@ namespace CS3750_FinalProject
                 row.CreateCell(7).SetCellValue(college.FullLessThanAssociate);
             }
             /*END COLLEGE SHEET, START DEPT SHEET*/
-            ISheet sheet2 = workbook.CreateSheet("InversionsByDepartment");
+            ISheet sheet2 = workbook.CreateSheet("InversionsByDepartment"); //sheet 2
 
+            //setup header rows
             IRow row1 = sheet2.CreateRow(0);
             row1.CreateCell(0).SetCellValue("Department");
             row1.CreateCell(1).SetCellValue("Total Amount To Fix");
@@ -278,9 +280,9 @@ namespace CS3750_FinalProject
             row1.CreateCell(7).SetCellValue("Full < Associate");
 
             var y = 1;
-            foreach (var college in Colleges)
+            foreach (var college in Colleges) //loop colleges
             {
-                foreach (var dept in college.Departments)
+                foreach (var dept in college.Departments) //loop dept and insert data
                 {
                     var row = sheet2.CreateRow(y++);
                     row.CreateCell(0).SetCellValue(dept.DepartmentName);
@@ -295,18 +297,18 @@ namespace CS3750_FinalProject
             }
             /*END DEPT SHEET*/
 
-            FileStream sw = File.Create(dlg.FileName);
+            var sw = File.Create(dlg.FileName); //create file based on name
 
-            workbook.Write(sw);
+            workbook.Write(sw); //write data to file
 
-            sw.Close();
+            sw.Close(); //close file stream
         }
 
         private void ShowDataGrid(object sender, RoutedEventArgs e)
         {
-            Brush ogColor = DataGridButton.Background;
+            var ogColor = DataGridButton.Background;
             SummaryButton.Background = ogColor;
-            BrushConverter brush = new BrushConverter();
+            var brush = new BrushConverter();
             DataGridButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
             DataGridButton.Foreground = new SolidColorBrush(Colors.White);
             SummaryButton.Foreground = new SolidColorBrush(Colors.Black);
@@ -317,9 +319,9 @@ namespace CS3750_FinalProject
 
         private void ShowSummary(object sender, RoutedEventArgs e)
         {
-            Brush ogColor = SummaryButton.Background;
+            var ogColor = SummaryButton.Background;
             DataGridButton.Background = ogColor;
-            BrushConverter brush = new BrushConverter();
+            var brush = new BrushConverter();
             SummaryButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
             DataGridButton.Foreground = new SolidColorBrush(Colors.Black);
             SummaryButton.Foreground = new SolidColorBrush(Colors.White);
@@ -330,7 +332,7 @@ namespace CS3750_FinalProject
 
         private void Quit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
         #endregion
 

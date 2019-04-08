@@ -26,6 +26,7 @@ namespace CS3750_FinalProject
             Inverters = new List<Employee>();
             Inverters.Add(i);
         }
+
         public InvertedEmployee(Employee e)
         {
             Inverted = new Employee();
