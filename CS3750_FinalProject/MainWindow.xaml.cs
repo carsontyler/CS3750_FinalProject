@@ -126,6 +126,9 @@ namespace CS3750_FinalProject
             InversionDataView.Visibility = Visibility.Visible;
         }
         
+        /// <summary>
+        /// Loading Column Chart to display the number of Inversions
+        /// </summary>
          private void LoadLineChartNOIData()
         {
             List<KeyValuePair<string, int>> NumberOfInversions = new List<KeyValuePair<string, int>>();
@@ -150,6 +153,9 @@ namespace CS3750_FinalProject
 
         }
 
+        /// <summary>
+        /// Method to load the Column series for the Amount to Fix Inversions
+        /// </summary>
         private void LoadLineChartATFData()
         {
             List<KeyValuePair<string, int>> AmountToFixList = new List<KeyValuePair<string, int>>();
@@ -166,6 +172,10 @@ namespace CS3750_FinalProject
 
         }
 
+        /// <summary>
+        /// Method to Load the Pie Chart and data
+        /// </summary>
+        /// <returns></returns>
         private List<KeyValuePair<string, int>> LoadPieChartData()
         {
             var key = Colleges[0].Departments[0].DepartmentName;
