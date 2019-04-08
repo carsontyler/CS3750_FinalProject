@@ -75,7 +75,7 @@ namespace CS3750_FinalProject
         private void ParseFile(string file)
         {
             BrushConverter brush = new BrushConverter();
-            DataGridButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
+            DataGridButton.Background = (Brush)brush.ConvertFrom("#837AE5");
             DataGridButton.Foreground = new SolidColorBrush(Colors.White);
             TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
             parser.SetDelimiters(",");
@@ -114,6 +114,9 @@ namespace CS3750_FinalProject
 
                 Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
                     Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
+
+                Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
+                    Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).OrderEmployees();
             }
 
             InversionCalculator.CalcInversion(Colleges);
@@ -317,7 +320,7 @@ namespace CS3750_FinalProject
             Brush ogColor = DataGridButton.Background;
             SummaryButton.Background = ogColor;
             BrushConverter brush = new BrushConverter();
-            DataGridButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
+            DataGridButton.Background = (Brush)brush.ConvertFrom("#837AE5");
             DataGridButton.Foreground = new SolidColorBrush(Colors.White);
             SummaryButton.Foreground = new SolidColorBrush(Colors.Black);
             HomeScreen.Visibility = Visibility.Hidden;
@@ -330,7 +333,7 @@ namespace CS3750_FinalProject
             Brush ogColor = SummaryButton.Background;
             DataGridButton.Background = ogColor;
             BrushConverter brush = new BrushConverter();
-            SummaryButton.Background = (Brush)brush.ConvertFrom("#bb33ff");
+            SummaryButton.Background = (Brush)brush.ConvertFrom("#837AE5");
             DataGridButton.Foreground = new SolidColorBrush(Colors.Black);
             SummaryButton.Foreground = new SolidColorBrush(Colors.White);
             HomeScreen.Visibility = Visibility.Hidden;

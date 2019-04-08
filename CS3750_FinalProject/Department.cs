@@ -18,5 +18,15 @@ namespace CS3750_FinalProject
             InvertedEmployees = new List<InvertedEmployee>();
             Employees = new List<Employee>();
         }
+
+        #endregion
+
+        #region Methods
+
+        public void OrderEmployees()
+        {
+            Employees = Employees.OrderByDescending(x => x.SalaryAmount).ToList();
+        }
+        #endregion
     }
 }
