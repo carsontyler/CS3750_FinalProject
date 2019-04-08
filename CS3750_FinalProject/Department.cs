@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CS3750_FinalProject
 {
     public class Department : InversionData
     {
+        #region Properties 
+
         public List<InvertedEmployee> InvertedEmployees { get; set; }
         public List<Employee> Employees { get; set; }
         public string DepartmentName { get; set; }
+
+        #endregion
+
+        #region Properties
 
         public Department(string department)
         {

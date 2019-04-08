@@ -13,7 +13,8 @@
                       Title="Inversion Tracker"
                       WindowState="Maximized"
                       ResizeMode="CanResize"
-                      FontFamily="TradeGothic">
+                      FontFamily="TradeGothic"
+                      Icon="Images/WLogo2.png">
     <Window.Resources>
         <Style x:Key="CellStyle"
                TargetType="DataGridCell">
@@ -95,13 +96,14 @@
                             </Viewbox>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Save"
+                    <MenuItem Header="Clear Data"
                               Padding="0,3,0,5"
                               Margin="0"
-                              FontSize="12">
+                              FontSize="12"
+                              Click="ClearData_Click">
                         <MenuItem.Icon>
                             <Viewbox>
-                                <iconPacks:PackIconMaterial Kind="Floppy"
+                                <iconPacks:PackIconMaterial Kind="SimOff"
                                                             VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"
                                                             Height="15"
@@ -119,23 +121,6 @@
                         <MenuItem.Icon>
                             <Viewbox>
                                 <iconPacks:PackIconMaterial Kind="ExitToApp"
-                                                            VerticalAlignment="Center"
-                                                            HorizontalAlignment="Center"
-                                                            Height="15"
-                                                            Width="15"
-                                                            Foreground="#492365" />
-                            </Viewbox>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Print"
-                              Margin="0"
-                              FontSize="12"
-                              Padding="0,3,0,5"
-                              BorderBrush="LightGray"
-                              BorderThickness="0,0,0,2">
-                        <MenuItem.Icon>
-                            <Viewbox>
-                                <iconPacks:PackIconMaterial Kind="Printer"
                                                             VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"
                                                             Height="15"
@@ -310,6 +295,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+        
         <Grid x:Name="SummaryView"
               Grid.Row="1"
               Visibility="Collapsed">
@@ -328,12 +314,12 @@
                         Title="College Overview"
                         Grid.Column="0">
                 <dvck:Chart.Series>
-                    <dvck:ColumnSeries Name="NumberOfInversions" 
+                <dvck:ColumnSeries Name="NumberOfInversions"
                                      Title="Number of Inversions"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
                     </dvck:ColumnSeries>
-                </dvck:Chart.Series>
+                    </dvck:Chart.Series>
             </dvck:Chart>
 
 
@@ -341,7 +327,7 @@
                         Title="College Overview"
                         Grid.Column="1">
                 <dvck:Chart.Series>
-                    <dvck:ColumnSeries Name="AmountToFix" 
+                    <dvck:ColumnSeries Name="AmountToFix"
                                      Title="Amount To Fix"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
@@ -378,9 +364,7 @@
 
         </Grid>
 
-
-
-        <Grid x:Name="HomeScreen"
+        <!--<Grid x:Name="HomeScreen"
               Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="38*" />
@@ -429,6 +413,6 @@
                        Source="Images/WeberStatue.png"
                        Margin="10" />
             </Grid>
-        </Grid>
+        </Grid>-->
     </Grid>
 </Controls:MetroWindow>

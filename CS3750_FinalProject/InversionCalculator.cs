@@ -1,15 +1,11 @@
-﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CS3750_FinalProject
 {
     public static class InversionCalculator
     {
+        #region Public Methods
+
         public static void CalcInversion(List<College> colleges)
         {
             foreach (var college in colleges) //loop through colleges
@@ -41,7 +37,7 @@ namespace CS3750_FinalProject
                                 case "Asso" when inverter.Rank == "Prof":
                                     continue;
                             }
-                            
+
                             if (inverted.SalaryAmount < inverter.SalaryAmount)//Check for salary difference
                             {
                                 if (moneyToFix < inverter.SalaryAmount - inverted.SalaryAmount)
@@ -49,7 +45,7 @@ namespace CS3750_FinalProject
                             }
                             else
                                 continue;
-                            if (!invertedYet) 
+                            if (!invertedYet)
                             {
                                 newIE.AddInverter(inverter);
                                 invertedYet = true;
@@ -113,13 +109,14 @@ namespace CS3750_FinalProject
                             newIE.AssociateLessThanAssistant++;
                             newIE.AssociateLessThanAssistantToFix += moneyToFix;
                         }
-                        else if (AsstInstr) {
+                        else if (AsstInstr)
+                        {
                             department.AssistantLessThanInstructor++;
                             department.AssistantLessThanInstructorToFix += moneyToFix;
                             newIE.AssistantLessThanInstructor++;
                             newIE.AssistantLessThanInstructorToFix += moneyToFix;
                         }
-                       
+
                         if (invertedYet)
                         {
                             department.TotalAmountToFix += moneyToFix;
@@ -144,5 +141,7 @@ namespace CS3750_FinalProject
                 }
             }
         }
+
+        #endregion
     }
 }

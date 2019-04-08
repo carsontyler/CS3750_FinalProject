@@ -192,6 +192,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\WLogo2.png" />
     <Resource Include="Images\WeberCampus.png" />
     <Resource Include="Images\WLogo.png" />
     <Resource Include="Images\WLogoFull.png" />

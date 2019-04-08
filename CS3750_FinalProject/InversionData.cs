@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CS3750_FinalProject
+﻿namespace CS3750_FinalProject
 {
     public class InversionData
     {
@@ -12,11 +6,11 @@ namespace CS3750_FinalProject
 
         public int TotalAmountToFix { get; set; }
         public int AssistantLessThanInstructorToFix { get; set; }
-        public int AssociateLessThanInstructorToFix { get;  set; }
-        public int FullLessThanInstructorToFix { get;  set; }
-        public int AssociateLessThanAssistantToFix { get;  set; }
-        public int FullLessThanAssistantToFix { get;  set; }
-        public int FullLessThanAssociateToFix { get;  set; }
+        public int AssociateLessThanInstructorToFix { get; set; }
+        public int FullLessThanInstructorToFix { get; set; }
+        public int AssociateLessThanAssistantToFix { get; set; }
+        public int FullLessThanAssistantToFix { get; set; }
+        public int FullLessThanAssociateToFix { get; set; }
         public int AssistantLessThanInstructor { get; set; }
         public int AssociateLessThanInstructor { get; set; }
         public int FullLessThanInstructor { get; set; }
@@ -25,6 +19,8 @@ namespace CS3750_FinalProject
         public int FullLessThanAssociate { get; set; }
 
         #endregion
+
+        #region Constructor
 
         public InversionData()
         {
@@ -42,5 +38,7 @@ namespace CS3750_FinalProject
             FullLessThanAssistant = 0;
             FullLessThanAssociate = 0;
         }
+
+        #endregion
     }
 }
