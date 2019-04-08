@@ -322,11 +322,11 @@
                         Width="600"
                         Grid.Column="1">
                 <dvck:Chart.Series>
-                    <dvck:LineSeries Name="NumberOfInversions" 
+                    <dvck:ColumnSeries Name="NumberOfInversions" 
                                      Title="Number of Inversions"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
-                    </dvck:LineSeries>
+                    </dvck:ColumnSeries>
                 </dvck:Chart.Series>
             </dvck:Chart>
 
@@ -339,11 +339,11 @@
                         Width="600"
                         Grid.Column="1">
                 <dvck:Chart.Series>
-                    <dvck:LineSeries Name="AmountToFix" 
+                    <dvck:ColumnSeries Name="AmountToFix" 
                                      Title="Amount To Fix"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
-                    </dvck:LineSeries>
+                    </dvck:ColumnSeries>
                 </dvck:Chart.Series>
             </dvck:Chart>
 

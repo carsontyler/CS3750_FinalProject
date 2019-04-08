@@ -146,7 +146,7 @@ namespace CS3750_FinalProject
                 totalInversion = 0;
             }
 
-          ((LineSeries)lineChartNOI.Series[0]).ItemsSource = NumberOfInversions;
+          ((ColumnSeries)lineChartNOI.Series[0]).ItemsSource = NumberOfInversions;
 
         }
 
@@ -162,7 +162,7 @@ namespace CS3750_FinalProject
                 AmountToFixList.Add(new KeyValuePair<string, int>(keyToAdd, valueToAdd));
             }
 
-            ((LineSeries)lineChartATF.Series[0]).ItemsSource = AmountToFixList;
+            ((ColumnSeries)lineChartATF.Series[0]).ItemsSource = AmountToFixList;
 
         }
 
