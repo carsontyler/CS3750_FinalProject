@@ -297,48 +297,58 @@
         <Grid x:Name="SummaryView"
               Grid.Row="1"
               Visibility="Collapsed">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width = "1*" />
+                <ColumnDefinition Width = "1*" />
+            </Grid.ColumnDefinitions>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            
             <dvck:Chart Name="lineChartNOI"
                         Title="College Overview"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Center"
-                        Height="400"
-                        Width="600"
-                        Grid.Column="1">
+                        Grid.Column="0">
                 <dvck:Chart.Series>
-                    <dvck:LineSeries Name="NumberOfInversions"
+                <dvck:ColumnSeries Name="NumberOfInversions"
                                      Title="Number of Inversions"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
-                    </dvck:LineSeries>
-                </dvck:Chart.Series>
+                    </dvck:ColumnSeries>
+                    </dvck:Chart.Series>
             </dvck:Chart>
 
 
             <dvck:Chart Name="lineChartATF"
                         Title="College Overview"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Right"
-                        Height="400"
-                        Width="600"
                         Grid.Column="1">
                 <dvck:Chart.Series>
-                    <dvck:LineSeries Name="AmountToFix"
+                    <dvck:ColumnSeries Name="AmountToFix"
                                      Title="Amount To Fix"
                                      IndependentValueBinding="{Binding Path=Key}"
                                      DependentValueBinding="{Binding Path=Value}">
-                    </dvck:LineSeries>
+                    </dvck:ColumnSeries>
                 </dvck:Chart.Series>
             </dvck:Chart>
 
+            <Grid 
+                Grid.Row="1"
+                Grid.ColumnSpan="2">
 
-
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width ="1*"/>
+                    <ColumnDefinition Width ="3*"/>
+                    <ColumnDefinition Width ="1*"/>
+                </Grid.ColumnDefinitions>
+                
             <dvck:Chart Name="pieChart"
-                        Width="600"
-                        Height="400"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Left">
+                        Grid.Column="1"
+                        Grid.Row="1">
+                        
                 <dvck:Chart.Series>
+                    
                     <dvck:PieSeries Title="Visualization"
                                     IndependentValueBinding="{Binding Path=Key}"
                                     DependentValueBinding="{Binding Path=Value}"
@@ -346,6 +356,7 @@
                     </dvck:PieSeries>
                 </dvck:Chart.Series>
             </dvck:Chart>
+            </Grid>
 
 
 

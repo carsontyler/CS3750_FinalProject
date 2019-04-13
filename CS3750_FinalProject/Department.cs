@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CS3750_FinalProject
 {
@@ -21,6 +22,14 @@ namespace CS3750_FinalProject
             Employees = new List<Employee>();
         }
 
+        #endregion
+
+        #region Methods
+
+        public void OrderEmployees()
+        {
+            Employees = Employees.OrderByDescending(x => x.SalaryAmount).ToList();
+        }
         #endregion
     }
 }
