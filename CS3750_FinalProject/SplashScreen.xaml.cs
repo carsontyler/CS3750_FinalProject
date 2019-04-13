@@ -21,16 +21,36 @@ namespace CS3750_FinalProject
     /// </summary>
     public partial class SplashScreen : Window
     {
+        #region Constructors 
+
+        /// <summary>
+        /// Default constructor for the Splash Screen
+        /// </summary>
         public SplashScreen()
         {
             InitializeComponent();
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Executes on 'Exit' button click. Exits the application.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
+        /// <summary>
+        /// Executes on 'Open File' button. 
+        /// Opens the file and checks to see if it was a valid CSV. If not, it stays on the current screen. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Open_File(object sender, RoutedEventArgs e)
         {
             var filedialog = new OpenFileDialog
@@ -49,5 +69,7 @@ namespace CS3750_FinalProject
                 this.Close();
             }
         }
+
+        #endregion
     }
 }
