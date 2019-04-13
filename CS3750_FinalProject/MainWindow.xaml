@@ -8,13 +8,15 @@
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                       xmlns:dvtk="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
                       xmlns:dvck="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+                      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                       xmlns:dvckp="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
                       mc:Ignorable="d"
                       Title="Inversion Tracker"
                       WindowState="Maximized"
                       ResizeMode="CanResize"
                       FontFamily="TradeGothic"
-                      Icon="Images/WLogo2.png">
+                      Icon="Images/WLogo2.png"
+                      Closing="MetroWindow_Closing">
     <Window.Resources>
         <Style x:Key="CellStyle"
                TargetType="DataGridCell">
@@ -62,6 +64,8 @@
                   Grid.Column="0"
                   Margin="0"
                   Grid.Row="0"
+                  BorderBrush="Black"
+                  BorderThickness="1,2,0,0"
                   VerticalAlignment="top"
                   Height="40">
                 <MenuItem FontSize="20"
@@ -149,26 +153,28 @@
             </Menu>
             <Button x:Name="DataGridButton"
                     Grid.Column="1"
-                    Height="40"
                     Padding="10"
                     Margin="0,0,0,0"
                     Width="Auto"
-                    FontSize="15"
+                    FontSize="17"
+                    Typography.Capitals="AllSmallCaps"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
+                    BorderThickness="2,2,0,2"
                     Style="{DynamicResource SquareButtonStyle}"
-                    Click="ShowDataGrid">Data Grid</Button>
+                    Click="ShowDataGrid">Details</Button>
             <Button x:Name="SummaryButton"
                     Grid.Column="2"
-                    Height="40"
                     Padding="10"
                     Margin="0,0,0,0"
+                    BorderThickness="2,2,1,2"
                     Width="Auto"
-                    FontSize="15"
+                    FontSize="17"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Style="{DynamicResource SquareButtonStyle}"
-                    Click="ShowSummary">Summary</Button>
+                    Typography.Capitals="AllSmallCaps"
+                    Click="ShowSummary">Charts</Button>
         </Grid>
 
         <Grid x:Name="InversionDataView"
@@ -188,7 +194,8 @@
                               Visibility="Visible"
                               RowDetailsVisibilityMode="Collapsed"
                               AutoGenerateColumns="False"
-                              CellStyle="{StaticResource CellStyle}">
+                              CellStyle="{StaticResource CellStyle}"
+                              BorderThickness="1,0,1,0">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -293,69 +300,69 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        
+
         <Grid x:Name="SummaryView"
               Grid.Row="1"
               Visibility="Collapsed">
-            
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width = "1*" />
-                <ColumnDefinition Width = "1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            
+
             <dvck:Chart Name="lineChartNOI"
                         Title="College Overview"
-                        Grid.Column="0">
+                        Grid.Column="0"
+                        BorderThickness="1,0,1,2">
                 <dvck:Chart.Series>
-                <dvck:ColumnSeries Name="NumberOfInversions"
-                                     Title="Number of Inversions"
-                                     IndependentValueBinding="{Binding Path=Key}"
-                                     DependentValueBinding="{Binding Path=Value}">
+                    <dvck:ColumnSeries Name="NumberOfInversions"
+                                       Title="Number of Inversions"
+                                       IndependentValueBinding="{Binding Path=Key}"
+                                       DependentValueBinding="{Binding Path=Value}">
                     </dvck:ColumnSeries>
-                    </dvck:Chart.Series>
+                </dvck:Chart.Series>
             </dvck:Chart>
 
 
             <dvck:Chart Name="lineChartATF"
                         Title="College Overview"
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        BorderThickness="1,0,1,2">
                 <dvck:Chart.Series>
                     <dvck:ColumnSeries Name="AmountToFix"
-                                     Title="Amount To Fix"
-                                     IndependentValueBinding="{Binding Path=Key}"
-                                     DependentValueBinding="{Binding Path=Value}">
+                                       Title="Amount To Fix"
+                                       IndependentValueBinding="{Binding Path=Key}"
+                                       DependentValueBinding="{Binding Path=Value}">
                     </dvck:ColumnSeries>
                 </dvck:Chart.Series>
             </dvck:Chart>
 
-            <Grid 
-                Grid.Row="1"
-                Grid.ColumnSpan="2">
+            <Grid Grid.Row="1"
+                  Grid.ColumnSpan="2">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width ="1*"/>
-                    <ColumnDefinition Width ="3*"/>
-                    <ColumnDefinition Width ="1*"/>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                
-            <dvck:Chart Name="pieChart"
-                        Grid.Column="1"
-                        Grid.Row="1">
-                        
-                <dvck:Chart.Series>
-                    
-                    <dvck:PieSeries Title="Visualization"
-                                    IndependentValueBinding="{Binding Path=Key}"
-                                    DependentValueBinding="{Binding Path=Value}"
-                                    AnimationSequence="FirstToLast">
-                    </dvck:PieSeries>
-                </dvck:Chart.Series>
-            </dvck:Chart>
+
+                <dvck:Chart Name="pieChart"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            BorderThickness="2,0,2,2">
+                    <dvck:Chart.Series>
+                        <dvck:PieSeries Title="Visualization"
+                                        IndependentValueBinding="{Binding Path=Key}"
+                                        DependentValueBinding="{Binding Path=Value}"
+                                        AnimationSequence="FirstToLast">
+                        </dvck:PieSeries>
+                    </dvck:Chart.Series>
+                </dvck:Chart>
             </Grid>
 
 

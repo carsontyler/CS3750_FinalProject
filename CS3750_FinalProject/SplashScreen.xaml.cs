@@ -43,6 +43,8 @@ namespace CS3750_FinalProject
             {
                 string file = filedialog.FileName;
                 var mainWindow = new MainWindow(file);
+                if (mainWindow.InvalidCsvFile)
+                    return;
                 mainWindow.Show();
                 this.Close();
             }

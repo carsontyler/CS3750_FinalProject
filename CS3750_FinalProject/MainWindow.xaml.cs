@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic.FileIO;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -22,6 +23,7 @@ namespace CS3750_FinalProject
 
         public List<College> Colleges;
         public DataTable InversionTable;
+        public bool InvalidCsvFile = true;
 
         public int TotalInversion { get; private set; }
 
@@ -29,6 +31,19 @@ namespace CS3750_FinalProject
 
         #region Constructor
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public MainWindow()
+        {
+            InitializeComponent();
+            Colleges = new List<College>();
+        }
+
+        /// <summary>
+        /// Constructor which gets called by the SplashScreen.
+        /// </summary>
+        /// <param name="fileName">The CSV to be opened.</param>
         public MainWindow(string fileName = "")
         {
             InitializeComponent();
@@ -37,18 +52,13 @@ namespace CS3750_FinalProject
                 ParseFile(fileName);
         }
 
-        public MainWindow()
-        {
-            InitializeComponent();
-            Colleges = new List<College>();
-        }
-
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Opens a file dialog for the user to choose a CSV file. 
+        /// Opens a file when the 'Open' button is pressed in the menu bar.
+        /// A file dialog is opened for the user to choose a CSV file. 
         /// Upon opening the CSV file, and assuming it's in the correct format, an Employee object will be created
         ///     and added to the global _employees list.
         /// </summary>
@@ -76,51 +86,64 @@ namespace CS3750_FinalProject
             }
         }
 
+        /// <summary>
+        /// Parse through the data to be displayed. Sorts the data into various groupings and adds it to the data grid on the DETAILS page
+        /// Also creates the associated graphs on the CHARTS page
+        /// </summary>
+        /// <param name="file">The CSV file to be parsed through</param>
         private void ParseFile(string file)
         {
             BrushConverter brush = new BrushConverter();
-            DataGridButton.Background = (Brush)brush.ConvertFrom("#837AE5");
-            DataGridButton.Foreground = new SolidColorBrush(Colors.White);
+            ShowDataGridExecute();
             TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
             parser.SetDelimiters(",");
 
             List<string> headers = new List<string>();
 
-            while (!parser.EndOfData)
+            // Begins the looping of the data, separates into Colleges and Deparmtnets. 
+            try
             {
-                var fields = parser.ReadFields();
-                if (fields[0] == "")
-                    continue;
-
-                if (fields[0] == "CLG" || fields[0] == "ID")
+                while (!parser.EndOfData)
                 {
-                    foreach (var field in fields)
-                        headers.Add(field);
-                    continue;
+                    var fields = parser.ReadFields();
+                    if (fields[0] == "")
+                        continue;
+
+                    if (fields[0] == "CLG" || fields[0] == "ID")
+                    {
+                        foreach (var field in fields)
+                            headers.Add(field);
+                        continue;
+                    }
+
+                    var employee = new Employee
+                    {
+                        College = fields[headers.IndexOf("CLG")],
+                        Department = fields[headers.IndexOf("DEPT.")],
+                        Name = fields[headers.IndexOf("NAME")],
+                        Rank = fields[headers.IndexOf("RNK")],
+                        SalaryAmount = int.Parse(fields[headers.IndexOf("9MSALARY")])
+                    };
+
+                    if (!Colleges.Any(a => a.CollegeName == fields[headers.IndexOf("CLG")]))
+                        Colleges.Add(new College(fields[headers.IndexOf("CLG")]));
+
+                    if (!Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).Departments.Any(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]))
+                        Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).Departments.Add(new Department(fields[headers.IndexOf("DEPT.")]));
+
+                    Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
+                        Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
+
+                    Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
+                        Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).OrderEmployees();
                 }
-
-                var employee = new Employee
-                {
-                    College = fields[headers.IndexOf("CLG")],
-                    Department = fields[headers.IndexOf("DEPT.")],
-                    Name = fields[headers.IndexOf("NAME")],
-                    Rank = fields[headers.IndexOf("RNK")],
-                    SalaryAmount = int.Parse(fields[headers.IndexOf("9MSALARY")])
-                };
-
-                if (!Colleges.Any(a => a.CollegeName == fields[headers.IndexOf("CLG")]))
-                    Colleges.Add(new College(fields[headers.IndexOf("CLG")]));
-
-                if (!Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).Departments.Any(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]))
-                    Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).Departments.Add(new Department(fields[headers.IndexOf("DEPT.")]));
-
-                Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
-                    Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).Employees.Add(employee);
-
-                Colleges.FirstOrDefault(a => a.CollegeName == fields[headers.IndexOf("CLG")]).
-                    Departments.First(a => a.DepartmentName == fields[headers.IndexOf("DEPT.")]).OrderEmployees();
             }
-
+            catch (Exception)
+            {
+                var popup = System.Windows.MessageBox.Show("Invalid CSV File! Please try again.", "Invalid File");
+                return;
+            }
+            InvalidCsvFile = false;
             InversionCalculator.CalcInversion(Colleges);
 
             DataGridCollege.ItemsSource = Colleges;
@@ -128,8 +151,8 @@ namespace CS3750_FinalProject
             LoadLineChartNOIData();
             LoadPieChartData();
             //HomeScreen.Visibility = Visibility.Hidden;
-            InversionDataView.Visibility = Visibility.Visible;
-            SummaryView.Visibility = Visibility.Collapsed;
+            //InversionDataView.Visibility = Visibility.Visible;
+            //SummaryView.Visibility = Visibility.Collapsed;
         }
 
         private void LoadLineChartNOIData()
@@ -191,6 +214,7 @@ namespace CS3750_FinalProject
                     }
                 }
             }
+            kvpList = kvpList.OrderByDescending(a => a.Value).ToList();
             ((PieSeries)pieChart.Series[0]).ItemsSource = kvpList;
             return kvpList;
         }
@@ -233,7 +257,6 @@ namespace CS3750_FinalProject
 
         private void Export(object sender, RoutedEventArgs e)
         {
-
             var dlg = new SaveFileDialog
             {
                 FileName = "InversionExport", // Default file name
@@ -309,7 +332,20 @@ namespace CS3750_FinalProject
             sw.Close();
         }
 
+        /// <summary>
+        /// Executes when the 'DETAILS' button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowDataGrid(object sender, RoutedEventArgs e)
+        {
+            ShowDataGridExecute();
+        }
+
+        /// <summary>
+        /// Sets ths display settings to show the 'DETAILS' tab and associated data grid
+        /// </summary>
+        private void ShowDataGridExecute()
         {
             Brush ogColor = DataGridButton.Background;
             SummaryButton.Background = ogColor;
@@ -322,7 +358,20 @@ namespace CS3750_FinalProject
             SummaryView.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Executes when the 'SUMMARY' button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowSummary(object sender, RoutedEventArgs e)
+        {
+            ShowSummaryExecute();
+        }
+
+        /// <summary>
+        /// Sets the display settings to show the 'SUMMARY' tab and associated data grid
+        /// </summary>
+        private void ShowSummaryExecute()
         {
             Brush ogColor = SummaryButton.Background;
             DataGridButton.Background = ogColor;
@@ -335,11 +384,38 @@ namespace CS3750_FinalProject
             InversionDataView.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Executes when the 'Quit' button is pressed in the menu. 
+        /// Displays a popup box to confirm they want to quit. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Quit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var result = System.Windows.MessageBox.Show("Are you sure you want to quit? Your data will not be saved.", "Quit", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No)
+                return;
+            Close();
         }
 
+        /// <summary>
+        /// Executes when the X button (on the window itself) is pressed.
+        /// Displays a popup box to confirm they want to quit. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var result = System.Windows.MessageBox.Show("Are you sure you want to quit? Your data will not be saved.", "Quit", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No) e.Cancel = true;
+        }
+
+        /// <summary>
+        /// Executes when the 'Clear Data' button is pressed in the menu.
+        /// Displays a popup box to confirm they want to clear the data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearData_Click(object sender, RoutedEventArgs e)
         {
             var result = System.Windows.MessageBox.Show("Would you like to clear the data?", "Clear Data", MessageBoxButton.YesNo);
@@ -348,6 +424,9 @@ namespace CS3750_FinalProject
             ClearData();
         }
 
+        /// <summary>
+        /// Clears the data from the data grid and graphs.
+        /// </summary>
         private void ClearData()
         {
             Colleges = new List<College>();
