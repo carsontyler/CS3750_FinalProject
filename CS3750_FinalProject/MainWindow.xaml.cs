@@ -282,45 +282,75 @@ namespace CS3750_FinalProject
             row0.CreateCell(7).SetCellValue("Full < Associate");
 
             var x = 1;
-            foreach (var college in Colleges)
+            foreach (var college in Colleges) //loop colleges
             {
                 var row = sheet1.CreateRow(x++);
                 row.CreateCell(0).SetCellValue(college.CollegeName);
                 row.CreateCell(1).SetCellValue(college.TotalAmountToFix);
-                row.CreateCell(2).SetCellValue(college.AssistantLessThanInstructor);
-                row.CreateCell(3).SetCellValue(college.AssociateLessThanInstructor);
-                row.CreateCell(4).SetCellValue(college.AssociateLessThanAssistant);
-                row.CreateCell(5).SetCellValue(college.FullLessThanInstructor);
-                row.CreateCell(6).SetCellValue(college.FullLessThanAssistant);
-                row.CreateCell(7).SetCellValue(college.FullLessThanAssociate);
+                row.CreateCell(2).SetCellValue(college.AssistantLessThanInstructorToFix);
+                row.CreateCell(3).SetCellValue(college.AssociateLessThanInstructorToFix);
+                row.CreateCell(4).SetCellValue(college.AssociateLessThanAssistantToFix);
+                row.CreateCell(5).SetCellValue(college.FullLessThanInstructorToFix);
+                row.CreateCell(6).SetCellValue(college.FullLessThanAssistantToFix);
+                row.CreateCell(7).SetCellValue(college.FullLessThanAssociateToFix);
             }
             /*END COLLEGE SHEET, START DEPT SHEET*/
-            ISheet sheet2 = workbook.CreateSheet("InversionsByDepartment");
+            ISheet sheet2 = workbook.CreateSheet("InversionsByDepartment"); //setup sheet 2
 
             IRow row1 = sheet2.CreateRow(0);
-            row1.CreateCell(0).SetCellValue("Department");
-            row1.CreateCell(1).SetCellValue("Total Amount To Fix");
-            row1.CreateCell(2).SetCellValue("Assistant < Instructor");
-            row1.CreateCell(3).SetCellValue("Associate < Instructor");
-            row1.CreateCell(4).SetCellValue("Associate < Assistant");
-            row1.CreateCell(5).SetCellValue("Full < Instructor");
-            row1.CreateCell(6).SetCellValue("Full < Assistant");
-            row1.CreateCell(7).SetCellValue("Full < Associate");
+            row1.CreateCell(0).SetCellValue("College");
+            row1.CreateCell(1).SetCellValue("Department");
+            row1.CreateCell(2).SetCellValue("Total Amount To Fix");
+            row1.CreateCell(3).SetCellValue("Assistant < Instructor");
+            row1.CreateCell(4).SetCellValue("Associate < Instructor");
+            row1.CreateCell(5).SetCellValue("Associate < Assistant");
+            row1.CreateCell(6).SetCellValue("Full < Instructor");
+            row1.CreateCell(7).SetCellValue("Full < Assistant");
+            row1.CreateCell(8).SetCellValue("Full < Associate");
 
             var y = 1;
-            foreach (var college in Colleges)
+            foreach (var college in Colleges) //loop colleges
             {
-                foreach (var dept in college.Departments)
+                foreach (var dept in college.Departments) //loop departments
                 {
                     var row = sheet2.CreateRow(y++);
-                    row.CreateCell(0).SetCellValue(dept.DepartmentName);
-                    row.CreateCell(1).SetCellValue(dept.TotalAmountToFix);
-                    row.CreateCell(2).SetCellValue(dept.AssistantLessThanInstructor);
-                    row.CreateCell(3).SetCellValue(dept.AssociateLessThanInstructor);
-                    row.CreateCell(4).SetCellValue(dept.AssociateLessThanAssistant);
-                    row.CreateCell(5).SetCellValue(dept.FullLessThanInstructor);
-                    row.CreateCell(6).SetCellValue(dept.FullLessThanAssistant);
-                    row.CreateCell(7).SetCellValue(dept.FullLessThanAssociate);
+                    row.CreateCell(0).SetCellValue(college.CollegeName);
+                    row.CreateCell(1).SetCellValue(dept.DepartmentName);
+                    row.CreateCell(2).SetCellValue(dept.TotalAmountToFix);
+                    row.CreateCell(3).SetCellValue(dept.AssistantLessThanInstructorToFix);
+                    row.CreateCell(4).SetCellValue(dept.AssociateLessThanInstructorToFix);
+                    row.CreateCell(5).SetCellValue(dept.AssociateLessThanAssistantToFix);
+                    row.CreateCell(6).SetCellValue(dept.FullLessThanInstructorToFix);
+                    row.CreateCell(7).SetCellValue(dept.FullLessThanAssistantToFix);
+                    row.CreateCell(8).SetCellValue(dept.FullLessThanAssociateToFix);
+                }
+            }
+            /*END DEPT SHEET, START EMPLOYEE SHEET*/
+            ISheet sheet3 = workbook.CreateSheet("InversionsByProfessor"); //setup sheet 2
+
+            IRow row2 = sheet3.CreateRow(0);
+            row2.CreateCell(0).SetCellValue("College");
+            row2.CreateCell(1).SetCellValue("Department");
+            row2.CreateCell(2).SetCellValue("Name");
+            row2.CreateCell(3).SetCellValue("Salary");
+            row2.CreateCell(4).SetCellValue("Number of Inversions");
+            row2.CreateCell(5).SetCellValue("Amount to Fix Inversion");
+
+            var z = 1;
+            foreach (var college in Colleges) //loop colleges
+            {
+                foreach (var dept in college.Departments) //loop departments
+                {
+                    foreach (var emp in dept.InvertedEmployees)
+                    {
+                        var row = sheet3.CreateRow(z++);
+                        row.CreateCell(0).SetCellValue(college.CollegeName);
+                        row.CreateCell(1).SetCellValue(dept.DepartmentName);
+                        row.CreateCell(2).SetCellValue(emp.Inverted.Name);
+                        row.CreateCell(3).SetCellValue(emp.Inverted.SalaryAmount);
+                        row.CreateCell(4).SetCellValue(emp.Inverters.Count);
+                        row.CreateCell(5).SetCellValue(emp.TotalAmountToFix);
+                    }
                 }
             }
             /*END DEPT SHEET*/
