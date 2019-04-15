@@ -93,7 +93,8 @@ namespace CS3750_FinalProject
         private void ParseFile(string file)
         {
             BrushConverter brush = new BrushConverter();
-            ShowDataGridExecute();
+            if (DataGridButton.Background != (Brush)brush.ConvertFrom("#837AE5"))
+                ShowDataGridExecute();
             TextFieldParser parser = new TextFieldParser(file) { HasFieldsEnclosedInQuotes = true };
             parser.SetDelimiters(",");
 
@@ -144,9 +145,9 @@ namespace CS3750_FinalProject
             }
             InvalidCsvFile = false;
             InversionCalculator.CalcInversion(Colleges);
-            
+
             DataGridCollege.ItemsSource = Colleges;
-            
+
             LoadLineChartATFData();
             LoadLineChartNOIData();
             LoadPieChartData();
@@ -229,15 +230,13 @@ namespace CS3750_FinalProject
                 if ((obj as DataGridRow).DetailsVisibility == Visibility.Visible)
                 {
                     (obj as DataGridRow).DetailsVisibility = Visibility.Collapsed;
-                    System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
-                    btn = sender as System.Windows.Controls.Button;
+                    System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
                     btn.Content = "+";
                 }
                 else
                 {
                     (obj as DataGridRow).DetailsVisibility = Visibility.Visible;
-                    System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
-                    btn = sender as System.Windows.Controls.Button;
+                    System.Windows.Controls.Button btn = sender as System.Windows.Controls.Button;
                     btn.Content = "-";
                 }
             }
@@ -377,9 +376,10 @@ namespace CS3750_FinalProject
         /// </summary>
         private void ShowDataGridExecute()
         {
-            Brush ogColor = DataGridButton.Background;
-            SummaryButton.Background = ogColor;
             BrushConverter brush = new BrushConverter();
+            Brush ogColor = (Brush)brush.ConvertFrom("#FFFFFF");
+            SummaryButton.Background = ogColor;
+            brush = new BrushConverter();
             DataGridButton.Background = (Brush)brush.ConvertFrom("#837AE5");
             DataGridButton.Foreground = new SolidColorBrush(Colors.White);
             SummaryButton.Foreground = new SolidColorBrush(Colors.Black);
@@ -403,9 +403,10 @@ namespace CS3750_FinalProject
         /// </summary>
         private void ShowSummaryExecute()
         {
-            Brush ogColor = SummaryButton.Background;
-            DataGridButton.Background = ogColor;
             BrushConverter brush = new BrushConverter();
+            Brush ogColor = (Brush)brush.ConvertFrom("#FFFFFF");
+            DataGridButton.Background = ogColor;
+            brush = new BrushConverter();
             SummaryButton.Background = (Brush)brush.ConvertFrom("#837AE5");
             DataGridButton.Foreground = new SolidColorBrush(Colors.Black);
             SummaryButton.Foreground = new SolidColorBrush(Colors.White);
@@ -425,7 +426,7 @@ namespace CS3750_FinalProject
             //var result = System.Windows.MessageBox.Show("Are you sure you want to quit? Your data will not be saved.", "Quit", MessageBoxButton.YesNo);
             //if (result == MessageBoxResult.No)
             //    return;
-            
+
             //MetroWindow_Closing is called on "close()" method  above code causes the popup box to happen twice
             Close();
         }
@@ -462,8 +463,8 @@ namespace CS3750_FinalProject
         private void ClearData()
         {
             Colleges = new List<College>();
-            DataGridCollege.ItemsSource = null; 
-         
+            DataGridCollege.ItemsSource = null;
+
             LoadLineChartATFData();
             LoadLineChartNOIData();
             LoadPieChartData();

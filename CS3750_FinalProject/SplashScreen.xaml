@@ -95,14 +95,14 @@
                 </Button>
             </Grid>
             <TextBlock Grid.Row="2"
-                VerticalAlignment="Bottom"
+                       VerticalAlignment="Bottom"
                        HorizontalAlignment="Center"
                        FontSize="9"
                        Foreground="#111111"
                        Text="  Created By: Cody Alves, Tyler Davies, Andrew Nilson, Tammy Platero, Carson Tyler 2019  ">
                 <TextBlock.Background>
                     <SolidColorBrush Color="White"
-                                     Opacity=".7"/>
+                                     Opacity=".7" />
                 </TextBlock.Background>
             </TextBlock>
         </Grid>
