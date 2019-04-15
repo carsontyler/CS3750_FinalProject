@@ -22,7 +22,6 @@ namespace CS3750_FinalProject
         #region Fields
 
         public List<College> Colleges;
-        public DataTable InversionTable;
         public bool InvalidCsvFile = true;
 
         public int TotalInversion { get; private set; }
@@ -145,8 +144,9 @@ namespace CS3750_FinalProject
             }
             InvalidCsvFile = false;
             InversionCalculator.CalcInversion(Colleges);
-
+            
             DataGridCollege.ItemsSource = Colleges;
+            
             LoadLineChartATFData();
             LoadLineChartNOIData();
             LoadPieChartData();
@@ -392,9 +392,11 @@ namespace CS3750_FinalProject
         /// <param name="e"></param>
         private void Quit(object sender, RoutedEventArgs e)
         {
-            var result = System.Windows.MessageBox.Show("Are you sure you want to quit? Your data will not be saved.", "Quit", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No)
-                return;
+            //var result = System.Windows.MessageBox.Show("Are you sure you want to quit? Your data will not be saved.", "Quit", MessageBoxButton.YesNo);
+            //if (result == MessageBoxResult.No)
+            //    return;
+            
+            //MetroWindow_Closing is called on "close()" method  above code causes the popup box to happen twice
             Close();
         }
 
@@ -430,12 +432,8 @@ namespace CS3750_FinalProject
         private void ClearData()
         {
             Colleges = new List<College>();
-            InversionTable = new DataTable();
-            //DataGridCollege.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Collapsed;
-            //DataGridCollege.Columns.Clear();
-            //DataGridCollege.Items.Clear();
-            //DataGridCollege.UpdateLayout();
-            //DataGridCollege.Items.Refresh();
+            DataGridCollege.ItemsSource = null; 
+         
             LoadLineChartATFData();
             LoadLineChartNOIData();
             LoadPieChartData();

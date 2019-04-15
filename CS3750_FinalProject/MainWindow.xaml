@@ -273,13 +273,76 @@
                                     </DataGrid.Columns>
                                     <DataGrid.RowDetailsTemplate>
                                         <DataTemplate>
-                                            <DataGrid x:Name="DataGridEmployees"
-                                                      ItemsSource="{Binding Employees}"
+                                            <DataGrid x:Name="DataGridInverted"
+                                                      ItemsSource="{Binding InvertedEmployees}"
                                                       IsReadOnly="True"
                                                       Visibility="Visible"
                                                       Margin="20,2,0,0"
                                                       RowDetailsVisibilityMode="Collapsed"
-                                                      AutoGenerateColumns="True">
+                                                      AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTemplateColumn>
+                                                        <DataGridTemplateColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <Button Click="ExpandRow">+</Button>
+                                                            </DataTemplate>
+                                                        </DataGridTemplateColumn.CellTemplate>
+                                                    </DataGridTemplateColumn>
+                                                    <DataGridTextColumn Header="Inverted Employee Name"
+                                                                        Binding="{Binding Inverted.Name, StringFormat={}{0:C}}"
+                                                                        CellStyle="{StaticResource CellLeftAlign}" />
+                                                    <DataGridTextColumn Header="Salary"
+                                                                        Binding="{Binding Inverted.SalaryAmount, StringFormat={}{0:C}}"
+                                                                        CellStyle="{StaticResource CellLeftAlign}" />
+                                                    <DataGridTextColumn Header="Rank"
+                                                                        Binding="{Binding Inverted.Rank}"
+                                                                        CellStyle="{StaticResource CellLeftAlign}" />
+                                                    <DataGridTextColumn Header="Amount To Fix"
+                                                                        Binding="{Binding TotalAmountToFix, StringFormat={}{0:C}}"
+                                                                        CellStyle="{StaticResource CellRightAlign}" />
+                                                    <DataGridTextColumn Header="Assistant &lt; Instructor"
+                                                                        Binding="{Binding AssistantLessThanInstructor}"
+                                                                        CellStyle="{StaticResource CellCenterAlign}" />
+                                                    <DataGridTextColumn Header="Associate &lt; Instructor"
+                                                                        Binding="{Binding AssociateLessThanInstructor}"
+                                                                        CellStyle="{StaticResource CellCenterAlign}" />
+                                                    <DataGridTextColumn Header="Associate &lt; Assistant"
+                                                                        Binding="{Binding AssociateLessThanAssistant}"
+                                                                        CellStyle="{StaticResource CellCenterAlign}" />
+                                                    <DataGridTextColumn Header="Full &lt; Instructor"
+                                                                        Binding="{Binding FullLessThanInstructor}"
+                                                                        CellStyle="{StaticResource CellCenterAlign}" />
+                                                    <DataGridTextColumn Header="Full &lt; Assistant"
+                                                                        Binding="{Binding FullLessThanAssistant}"
+                                                                        CellStyle="{StaticResource CellCenterAlign}" />
+                                                    <DataGridTextColumn Header="Full &lt; Associate"
+                                                                        Binding="{Binding FullLessThanAssociate}"
+                                                                        CellStyle="{StaticResource CellCenterAlign}" />
+                                                </DataGrid.Columns>
+                                                <DataGrid.RowDetailsTemplate>
+                                                    <DataTemplate>
+                                                        <DataGrid x:Name="DataGridInverters"
+                                                                  ItemsSource="{Binding Inverters}"
+                                                                  IsReadOnly="True"
+                                                                  Visibility="Visible"
+                                                                  Margin="20,2,0,0"
+                                                                  RowDetailsVisibilityMode="Collapsed"
+                                                                  AutoGenerateColumns="False">
+                                                            <DataGrid.Columns>
+                                                                
+                                                                <DataGridTextColumn Header="Inverter Name"
+                                                                                    Binding="{Binding Name, StringFormat={}{0:C}}"
+                                                                                    CellStyle="{StaticResource CellLeftAlign}" />
+                                                                <DataGridTextColumn Header="Salary"
+                                                                                    Binding="{Binding SalaryAmount, StringFormat={}{0:C}}"
+                                                                                    CellStyle="{StaticResource CellLeftAlign}" />
+                                                                <DataGridTextColumn Header="Rank"
+                                                                                    Binding="{Binding Rank}"
+                                                                                    CellStyle="{StaticResource CellLeftAlign}" />
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </DataTemplate>
+                                                </DataGrid.RowDetailsTemplate>
                                             </DataGrid>
                                         </DataTemplate>
                                     </DataGrid.RowDetailsTemplate>
