@@ -329,7 +329,7 @@
                                                                   RowDetailsVisibilityMode="Collapsed"
                                                                   AutoGenerateColumns="False">
                                                             <DataGrid.Columns>
-                                                                
+
                                                                 <DataGridTextColumn Header="Inverter Name"
                                                                                     Binding="{Binding Name, StringFormat={}{0:C}}"
                                                                                     CellStyle="{StaticResource CellLeftAlign}" />
@@ -391,7 +391,6 @@
                 </dvck:Chart.Series>
             </dvck:Chart>
 
-
             <dvck:Chart Name="lineChartATF"
                         Title="College Overview"
                         Grid.Column="1"
@@ -427,8 +426,6 @@
                     </dvck:Chart.Series>
                 </dvck:Chart>
             </Grid>
-
-
 
         </Grid>
 
