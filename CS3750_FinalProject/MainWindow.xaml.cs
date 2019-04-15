@@ -326,7 +326,7 @@ namespace CS3750_FinalProject
                 }
             }
             /*END DEPT SHEET, START EMPLOYEE SHEET*/
-            ISheet sheet3 = workbook.CreateSheet("InversionsByProfessor"); //setup sheet 2
+            ISheet sheet3 = workbook.CreateSheet("InversionsByProfessor"); //setup sheet 3
 
             IRow row2 = sheet3.CreateRow(0);
             row2.CreateCell(0).SetCellValue("College");
@@ -336,12 +336,13 @@ namespace CS3750_FinalProject
             row2.CreateCell(4).SetCellValue("Number of Inversions");
             row2.CreateCell(5).SetCellValue("Amount to Fix Inversion");
 
+            var final = 0;
             var z = 1;
             foreach (var college in Colleges) //loop colleges
             {
                 foreach (var dept in college.Departments) //loop departments
                 {
-                    foreach (var emp in dept.InvertedEmployees)
+                    foreach (var emp in dept.InvertedEmployees) //loop inverted employees
                     {
                         var row = sheet3.CreateRow(z++);
                         row.CreateCell(0).SetCellValue(college.CollegeName);
@@ -350,10 +351,20 @@ namespace CS3750_FinalProject
                         row.CreateCell(3).SetCellValue(emp.Inverted.SalaryAmount);
                         row.CreateCell(4).SetCellValue(emp.Inverters.Count);
                         row.CreateCell(5).SetCellValue(emp.TotalAmountToFix);
+                        final += emp.TotalAmountToFix;
                     }
                 }
             }
-            /*END DEPT SHEET*/
+            /*END EMP SHEET, START OVERVIEW SHEET*/
+            ISheet sheet4 = workbook.CreateSheet("Overview"); //setup sheet 4
+
+            IRow row3 = sheet4.CreateRow(0);
+            row3.CreateCell(0).SetCellValue("Total Number of Inversions");
+            row3.CreateCell(1).SetCellValue("Total Amount to Fix Inversions");
+            IRow row4 = sheet4.CreateRow(1);
+            row4.CreateCell(0).SetCellValue(z);
+            row4.CreateCell(1).SetCellValue(final);
+            /*END OVERVIEW SHEET*/
 
             FileStream sw = File.Create(dlg.FileName);
 
