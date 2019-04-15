@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Height="270"
         Width="480"
+        Icon="Images/WLogo2.png"
         ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="Images/WeberCampus.png"></ImageBrush>
@@ -64,9 +65,10 @@
                         Click="Open_File"
                         Grid.Row="2"
                         Width="200"
-                        FontSize="13"
+                        FontSize="15"
                         Margin="20,0,0,0"
                         BorderBrush="Black"
+                        Typography.Capitals="AllSmallCaps"
                         BorderThickness="2"
                         HorizontalAlignment="Left"
                         Style="{DynamicResource SquareButtonStyle}">
@@ -79,7 +81,8 @@
                         Click="Exit"
                         Grid.Row="2"
                         Width="200"
-                        FontSize="13"
+                        FontSize="15"
+                        Typography.Capitals="AllSmallCaps"
                         Margin="0,0,20,0"
                         BorderBrush="Black"
                         BorderThickness="2"
@@ -92,11 +95,15 @@
                 </Button>
             </Grid>
             <TextBlock Grid.Row="2"
-                       VerticalAlignment="Bottom"
+                VerticalAlignment="Bottom"
                        HorizontalAlignment="Center"
                        FontSize="9"
-                       Foreground="DarkGray">
-                Created By: Andrew Nilson, Carson Tyler, Tyler Davies, Cody Alves, Tammy Platero, 2019
+                       Foreground="#111111"
+                       Text="  Created By: Cody Alves, Tyler Davies, Andrew Nilson, Tammy Platero, Carson Tyler 2019  ">
+                <TextBlock.Background>
+                    <SolidColorBrush Color="White"
+                                     Opacity=".7"/>
+                </TextBlock.Background>
             </TextBlock>
         </Grid>
     </Grid>
