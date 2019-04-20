@@ -99,7 +99,7 @@
                        HorizontalAlignment="Center"
                        FontSize="9"
                        Foreground="#111111"
-                       Text="  Created By: Cody Alves, Tyler Davies, Andrew Nilson, Tammy Platero, Carson Tyler 2019  ">
+                       Text="  Created By: Cody Alves, Tyler Davies, Andrew Nilson, Tammy Platero, Logan Sparkman, Carson Tyler 2019  ">
                 <TextBlock.Background>
                     <SolidColorBrush Color="White"
                                      Opacity=".7" />
